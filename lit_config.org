@@ -1,6 +1,17 @@
+#+title: Doom Emacs Configuration
+#+PROPERTY: header-args :tangle config.el
+#+startup: content
+
+* General Configuration
+** User Config
+#+begin_src elisp
 (setq user-full-name "David Rambo"
       user-mail-address "davidrambo@mailfence.com")
+#+end_src
 
+** Fringe and Line Numbers
+*** Enable line numbers for programming and text modes.
+#+begin_src elisp
 (setq display-line-numbers-type 'relative)
 
 (defun dr/display-line-numbers-hook ()
@@ -8,12 +19,20 @@
   )
 (add-hook 'prog-mode-hook 'dr/display-line-numbers-hook)
 (add-hook 'text-mode-hook 'dr/display-line-numbers-hook)
+#+end_src
 
+*** Disable line numbers for some modes
+Create a function and a hook to disable line numbers in org mode.
+#+begin_src elisp
 (defun dr/disable-line-numbers-hook ()
   (display-line-numbers-mode 0)
   )
 (add-hook 'org-mode-hook 'dr/disable-line-numbers-hook)
+#+end_src
 
+** Fonts
+Set font face and size depending upon the system: ~gnu/linux~ for Linux, ~darwin~ for MacOS.
+#+begin_src elisp
 (setq doom-font (font-spec :family "MesloLGSDZ Nerd Font" :size 16)
       doom-variable-pitch-font (font-spec :family "Source Sans Pro" :size 16))
 
@@ -23,30 +42,66 @@
 ;;       ((eq system-type 'darwin)
 ;;        (setq doom-font (font-spec :family "SauceCodePro Nerd Font Mono" :size 14)
 ;;              doom-variable-pitch-font (font-spec :family "Source Sans Pro" size: 15)))))
+#+end_src
 
+** Theme
+#+begin_src elisp
 (setq doom-theme 'doom-vibrant)
+#+end_src
 
+** Line spacing
+#+begin_src elisp
 (setq-default line-spacing 0.2)
+#+end_src
 
+** Evil Undo
+#+begin_src elisp
 (setq  evil-want-fine-undo t
        undo-limit 80000000)
+#+end_src
 
+** Window Splitting
+From https://github.com/sunnyhasija/Academic-Doom-Emacs-Config
+"The following code allows me to choose which buffer I want to see when I split a window. It first does a split to the right, and then opens Ivy and and shows me a preview."
+#+begin_src elisp
 (setq evil-vsplit-window-right t
       evil-split-window-below t)
 (defadvice! prompt-for-buffer (&rest _)
   :after '(evil-window-split evil-window-vsplit evil-window-new)
   (persp-switch-to-buffer))
+#+end_src
 
+Split horizontally by default.
+#+begin_src elisp
 (setq split-height-threshold nil)
 (setq split-width-threshold 0)
+#+end_src
 
+* Navigation
+** Counsel Outline
+#+begin_src elisp
 (define-key evil-normal-state-map (kbd "go") 'counsel-outline)
+#+end_src
 
+** Avy (not in use)
+The below keymaps approximate leap.nvim's behavior.
+Leap combines evil-snipe's immediate jump with avy's shortcut prompts.
+For now I am using doom's builtin approach: snipe to the first character and then use either ~;~ and ~,~ (to traverse matches) or ~C-;~ (to show avy's prompts).
+#+begin_src elisp
 ;; (define-key evil-normal-state-map (kbd "s") 'avy-goto-char-2-below)
 ;; (define-key evil-normal-state-map (kbd "S") 'avy-goto-char-2-above)
+#+end_src
 
+* Org Mode
+** Default org file directory
+#+begin_src elisp
 (setq org-directory "~/notes/")
+#+end_src
 
+** Org Modern
+This block adds org-mode hooks to enable org-modern.
+It also implements some apprearance effects as suggested by minad/org-mode.
+#+begin_src elisp
 (add-hook! org-mode
            #'org-modern-mode)
 (add-hook! 'org-agenda-finalize-hook #'org-modern-agenda)
@@ -65,7 +120,17 @@
   (face-spec-reset-face face)
   (set-face-foreground face (face-attribute 'default :background)))
 (set-face-background 'fringe (face-attribute 'default :background))
+#+end_src
 
+** Mixed Pitch
+Getting variable fonts to load in org-mode with doom has always been a challenge.
+I have never been able to reliably access doom's own variable-pitch font.
+The two approaches not in use would work but the font sizes would be off.
+I used to use tecosaur's configuration.
+However, that no longer works with my configuration, so I use a mixed-pitch hook and set the variable-pitch face directly.
+
+*** mixed-pitch hook
+#+begin_src elisp
 (add-hook! 'org-mode-hook #'mixed-pitch-mode)
 
 (defun dr/org-mode-setup ()
@@ -74,7 +139,35 @@
   (hl-line-mode nil)
   )
 (add-hook 'org-mode-hook 'dr/org-mode-setup)
+#+end_src
 
+*** tecosaur's mixed-pitch-modes
+#+begin_src elisp :tangle no
+(defvar mixed-pitch-modes '(org-mode LaTeX-mode markdown-mode)
+  "Modes that `mixed-pitch-mode' should be enabled in, but only after UI initialisation.")
+(defun init-mixed-pitch-h ()
+  "Hook `mixed-pitch-mode' into each mode in `mixed-pitch-modes'.
+Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
+  (when (memq major-mode mixed-pitch-modes)
+    (mixed-pitch-mode 1))
+  (dolist (hook mixed-pitch-modes)
+    (add-hook (intern (concat (symbol-name hook) "-hook")) #'mixed-pitch-mode)))
+(add-hook 'doom-init-ui-hook #'init-mixed-pitch-h)
+
+(autoload #'mixed-pitch-serif-mode "mixed-pitch"
+  "Change the default face of the current buffer to a serifed variable pitch, while keeping some faces fixed pitch." t)
+#+end_src
+
+*** custom-theme-set-faces (not in use)
+#+begin_src elisp
+(custom-theme-set-faces
+        'user
+                '(variable-pitch ((t (:family "Source Sans Pro" :height 140 :weight regular))))
+                '(fixed-pitch ((t ( :family "MesloLGSDZ Nerd Font" :height 140)))))
+#+end_src
+
+** Org Configuration
+#+begin_src elisp
 (after! org
   (setq
    org-hide-emphasis-markers t
@@ -104,7 +197,39 @@
               (org-level-8 . 1.0)))
    (set-face-attribute (car face) nil :weight 'regular :height (cdr face)))
 )
+#+end_src
 
+** Superstar (not in use)
+Org-modern provides the below functionality.
+
+(use-package! org-superstar-mode
+  :custom
+    org-superstar-headline-bullets-list '("◉" "○" "◌" "⁖" "◿")
+    org-superstar-remove-leading-stars
+  :hook (org-mode . org-bullets-mode))
+
+(after! org-superstar
+  (setq org-superstar-special-todo-items t
+        org-superstar-todo-bullet-alist
+                '(("TODO" . 9744)
+                  ("[ ]" . 9744)
+                  ("DONE" . 9745)
+                  ("[X]" . 9745)
+                  ("NEXT" . 9744)
+                  ("ACTIVE" . )))
+    )
+
+(use-package! prettify-symbols-mode
+  :custom
+; ; (push '("[ ]" .  "☐") prettify-symbols-alist)
+  prettify-symbols-alist '(("[ ]" . "☐")
+                          ("[-]" . "❍")
+                          ("[X]" . "☑"))
+  :hook (org-mode . prettify-symbols-mode)
+)
+
+** Journal
+#+begin_src elisp
 (use-package! org-journal
   :init
   (setq org-journal-dir "~/journal/"
@@ -117,9 +242,15 @@
 
   (setq org-journal-enable-agenda-integration nil)
 )
+#+end_src
 
+** Agenda
+#+begin_src elisp
 (setq org-agenda-files '("~/notes/tasks.org"))
+#+end_src
 
+*** Keywords
+#+begin_src elisp
 (after! org
 
   (setq org-todo-keywords
@@ -148,7 +279,11 @@
  ;;   )
  ;; )
 )
+#+end_src
 
+*** org-agenda icons
+
+#+begin_src elisp
 (defun fw/agenda-icon-octicon (name)
   "Returns an all-the-icons-octicon icon"
   (list (all-the-icons-octicon name)))
@@ -166,7 +301,11 @@
         ("Home" ,(fw/agenda-icon-octicon "home") nil nil :ascent center)
         ("Habits" ,(fw/agenda-icon-faicon "calendar-check-o") nil nil :ascent center)
         ))
+#+end_src
 
+*** Set ~org-agenda-files~ and custom commands that show up with "SPC o A":
+
+#+begin_src elisp
 (setq org-agenda-custom-commands
   '(
     ("n" "Active and Next Tasks"
@@ -220,7 +359,46 @@
         ))
       ))
 ))
+#+end_src
 
+Alternative custom agenda views:
+(setq org-agenda-custom-commands
+      '(("d" "Dashboard"
+         ((agenda "" ((org-deadline-warning-days 7)))
+          (todo "NEXT"
+    	    ((org-agenda-overriding-header "Next Tasks")))
+          (todo "ACTIVE"
+    	    ((org-agenda-overriding-header "Active Tasks")))))
+        ("n" "Next Tasks"
+         ((todo "NEXT"
+    	    ((org-agenda-overriding-header "Next Tasks")))))
+        ("a" "Active Tasks"
+         ((todo "ACTIVE"
+    	    ((org-agenda-overriding-header "Active Tasks")))))))
+
+** Super Agenda (not in use)
+(use-package! org-super-agenda
+  :after org-agenda
+  :init
+  (setq
+        org-log-done nil
+        org-agenda-start-day nil
+        org-agenda-span 7
+        org-agenda-skip-scheduled-if-done t
+        org-agenda-skip-deadline-if-done t
+        org-agenda-include-deadlines t
+        org-agenda-block-separator 9472
+        org-agenda-tags-column 100
+        org-agenda-compact-blocks nil
+        org-agenda-dim-blocked-tasks nil
+        org-agenda-start-on-weekday nil
+        org-super-agenda-groups nil
+        )
+  :config
+  (org-super-agenda-mode)
+)
+** Visual Column Mode
+#+begin_src elisp
 (setq fill-column 90)
 
 (defun center-visual-fill ()
@@ -232,19 +410,31 @@
 (map! :leader
       :desc "visual-fill-column-mode"
       "W" #'visual-fill-column-mode)
+#+end_src
 
+** Org File Mappings
+*** Open Task File
+Function to open tasks.org plus mapping.
+#+begin_src elisp
 (defun open-task-file ()
   "Open tasks.org file."
   (interactive)
   (find-file-existing "~/notes/tasks.org"))
 (global-set-key (kbd "C-c t") 'open-task-file)
+#+end_src
 
+*** Open hours log
+Function to open hours-log.org plus mapping to open.
+#+begin_src elisp
 (defun open-hours-log ()
   "Open hours-log.org file."
   (interactive)
   (find-file-existing "~/notes/hours-log.org"))
 (global-set-key (kbd "C-c h") 'open-hours-log)
+ #+end_src
 
+** Auto-tangle
+#+begin_src elisp
 (defun efs/org-babel-tangle-config ()
   (when (string-equal (buffer-file-name)
                       (expand-file-name "~/.config/emacs-from-scratch/config.org"))
@@ -253,3 +443,4 @@
       (org-babel-tangle))))
 
 (add-hook! org-mode (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
+#+end_src
