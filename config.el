@@ -42,6 +42,9 @@
 (setq split-height-threshold nil)
 (setq split-width-threshold 0)
 
+(after! evil
+  (evil-select-search-module 'evil-search-module 'isearch))
+
 (define-key evil-normal-state-map (kbd "go") 'counsel-outline)
 
 ;; (define-key evil-normal-state-map (kbd "s") 'avy-goto-char-2-below)

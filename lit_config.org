@@ -83,6 +83,13 @@ Split horizontally by default.
 #+end_src
 
 * Navigation
+** Evil search in folds
+https://github.com/doomemacs/doomemacs/issues/6478#issuecomment-1219582005
+#+begin_src elisp
+(after! evil
+  (evil-select-search-module 'evil-search-module 'isearch))
+#+end_src
+
 ** Counsel Outline
 #+begin_src elisp
 (define-key evil-normal-state-map (kbd "go") 'counsel-outline)
