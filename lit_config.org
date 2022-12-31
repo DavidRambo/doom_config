@@ -32,16 +32,23 @@ Create a function and a hook to disable line numbers in org mode.
 
 ** Fonts
 Set font face and size depending upon the system: ~gnu/linux~ for Linux, ~darwin~ for MacOS.
+Be sure to include the decimal when declaring ~:size~.
 #+begin_src elisp
-(setq doom-font (font-spec :family "MesloLGSDZ Nerd Font" :size 16)
-      doom-variable-pitch-font (font-spec :family "Source Sans Pro" :size 16))
+;; (setq doom-font (font-spec :family "MesloLGSDZ Nerd Font" :size 14.0)
+;;       doom-variable-pitch-font (font-spec :family "Source Sans Pro" :size 16.0))
 
-;; (cond ((eq system-type 'gnu/linux)
-;;        (setq doom-font (font-spec :family "MesloLGSDZ Nerd Font" :size 16)
-;;              doom-variable-pitch-font (font-spec :family "Source Sans Pro" :size 16))
-;;       ((eq system-type 'darwin)
-;;        (setq doom-font (font-spec :family "SauceCodePro Nerd Font Mono" :size 14)
-;;              doom-variable-pitch-font (font-spec :family "Source Sans Pro" size: 15)))))
+(cond ((eq system-type 'gnu/linux)
+        (setq doom-font (font-spec :family "SauceCodePro NF" :size 14.0)
+            doom-variable-pitch-font (font-spec :family "Source Sans Pro" :size 18.0 :weight 'regular)
+            doom-serif-font (font-spec :family "DejaVu Serif" :size 16.0)
+            doom-big-font (font-spec :size 28.0))
+       )
+      ((eq system-type 'darwin)
+        (setq doom-font (font-spec :family "SauceCodePro Nerd Font Mono" :size 16.0)
+            doom-variable-pitch-font (font-spec :family "Source Sans Pro" :size 18.0 :weight 'regular)
+            doom-serif-font (font-spec :family "PT Serif" :size 16.0)
+            doom-big-font (font-spec :size 28.0))
+       ))
 #+end_src
 
 ** Theme
@@ -123,17 +130,17 @@ It also implements some apprearance effects as suggested by minad/org-mode.
         :type '(repeat string))
 
 ;; Add frame borders and window dividers
-(after! org
-(modify-all-frames-parameters
- '((right-divider-width . 10)
-   (internal-border-width . 10)))
-(dolist (face '(window-divider
-                window-divider-first-pixel
-                window-divider-last-pixel))
-  (face-spec-reset-face face)
-  (set-face-foreground face (face-attribute 'default :background)))
-(set-face-background 'fringe (face-attribute 'default :background))
-)
+;; (after! org
+;;     (modify-all-frames-parameters
+;;     '((right-divider-width . 10)
+;;     (internal-border-width . 10)))
+;;     (dolist (face '(window-divider
+;;                     window-divider-first-pixel
+;;                     window-divider-last-pixel))
+;;     (face-spec-reset-face face)
+;;     (set-face-foreground face (face-attribute 'default :background)))
+;;     (set-face-background 'fringe (face-attribute 'default :background))
+;; )
 #+end_src
 
 ** Mixed Pitch
@@ -143,8 +150,16 @@ The two approaches not in use would work but the font sizes would be off.
 I used to use tecosaur's configuration.
 However, that no longer works with my configuration, so I use a mixed-pitch hook and set the variable-pitch face directly.
 
-*** mixed-pitch hook
+*** mixed-pitch
 #+begin_src elisp
+(use-package! mixed-pitch
+  :hook
+  (org-mode . mixed-pitch-mode))
+
+;; (custom-set-faces! '(variable-pitch :height 160))
+#+end_src
+
+#+begin_src elisp :tangle no
 (add-hook! 'org-mode-hook #'mixed-pitch-mode)
 
 (defun dr/org-mode-setup ()
@@ -172,12 +187,17 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
   "Change the default face of the current buffer to a serifed variable pitch, while keeping some faces fixed pitch." t)
 #+end_src
 
-*** custom-theme-set-faces
-#+begin_src elisp
+*** custom-theme-set-faces (not in use)
+#+begin_src elisp :tangle no
 (custom-theme-set-faces
         'user
                 '(variable-pitch ((t (:family "Source Sans Pro" :height 140 :weight regular))))
                 '(fixed-pitch ((t ( :family "MesloLGSDZ Nerd Font" :height 140)))))
+#+end_src
+
+#+begin_src elisp
+(custom-set-faces!
+  '(variable-pitch :family "Source Sans Pro" :height 140 :weight regular))
 #+end_src
 
 ** Org Appearance
@@ -193,7 +213,7 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
    org-fold-catch-invisible-edits 'show-and-error
    org-special-ctrl-a/e t
    org-insert-heading-respect-content t
-   org-indent-indentation-per-level 1
+   org-indent-indentation-per-level 2
 
    org-agenda-files '("~/notes/tasks.org"
                       "~/notes/cs61b_syllabus.org")
@@ -223,6 +243,11 @@ The first should be the most strightforward, as it simply requires setting ~org-
 (custom-set-faces! '(org-quote :inherit doom-variable-pitch-font :slant normal))
 #+end_src
 Doom emacs's ~custom-set-faces!~ macro makes this trivial.
+
+#+begin_src elisp
+(custom-set-faces! '(fixed-pitch :inherit doom-font :size 14))
+#+end_src
+
 ** Superstar (not in use)
 Org-modern provides the below functionality.
 
@@ -372,16 +397,16 @@ Org-modern provides the below functionality.
         )
      ))
 
-    ("r" "Reading Tasks"
-     ((todo "READING"
-        ((org-agenda-overriding-header "\nCurrently Reading")
-        (org-agenda-remove-tags t)
-        ))
-      (todo "READ"
-        ((org-agenda-overriding-header "\nTo Read")
-        (org-agenda-remove-tags t)
-        ))
-      ))
+    ;; ("r" "Reading Tasks"
+    ;;  ((todo "READING"
+    ;;     ((org-agenda-overriding-header "\nCurrently Reading")
+    ;;     (org-agenda-remove-tags t)
+    ;;     ))
+    ;;   (todo "READ"
+    ;;     ((org-agenda-overriding-header "\nTo Read")
+    ;;     (org-agenda-remove-tags t)
+    ;;     ))
+    ;;   ))
 ))
 #+end_src
 

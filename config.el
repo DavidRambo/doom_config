@@ -67,31 +67,26 @@
         :type '(repeat string))
 
 ;; Add frame borders and window dividers
-(after! org
-(modify-all-frames-parameters
- '((right-divider-width . 10)
-   (internal-border-width . 10)))
-(dolist (face '(window-divider
-                window-divider-first-pixel
-                window-divider-last-pixel))
-  (face-spec-reset-face face)
-  (set-face-foreground face (face-attribute 'default :background)))
-(set-face-background 'fringe (face-attribute 'default :background))
-)
+;; (after! org
+;;     (modify-all-frames-parameters
+;;     '((right-divider-width . 10)
+;;     (internal-border-width . 10)))
+;;     (dolist (face '(window-divider
+;;                     window-divider-first-pixel
+;;                     window-divider-last-pixel))
+;;     (face-spec-reset-face face)
+;;     (set-face-foreground face (face-attribute 'default :background)))
+;;     (set-face-background 'fringe (face-attribute 'default :background))
+;; )
 
-(add-hook! 'org-mode-hook #'mixed-pitch-mode)
+(use-package! mixed-pitch
+  :hook
+  (org-mode . mixed-pitch-mode))
 
-(defun dr/org-mode-setup ()
-  (variable-pitch-mode 1)
-  (set-face-attribute 'variable-pitch nil :height 150)
-  (hl-line-mode nil)
-  )
-(add-hook 'org-mode-hook 'dr/org-mode-setup)
+;; (custom-set-faces! '(variable-pitch :height 160))
 
-(custom-theme-set-faces
-        'user
-                '(variable-pitch ((t (:family "Source Sans Pro" :height 140 :weight regular))))
-                '(fixed-pitch ((t ( :family "MesloLGSDZ Nerd Font" :height 140)))))
+(custom-set-faces!
+  '(variable-pitch :family "Source Sans Pro" :height 140 :weight regular))
 
 (after! org
   (setq
@@ -104,7 +99,7 @@
    org-fold-catch-invisible-edits 'show-and-error
    org-special-ctrl-a/e t
    org-insert-heading-respect-content t
-   org-indent-indentation-per-level 1
+   org-indent-indentation-per-level 2
 
    org-agenda-files '("~/notes/tasks.org"
                       "~/notes/cs61b_syllabus.org")
@@ -125,6 +120,8 @@
 )
 
 (custom-set-faces! '(org-quote :inherit doom-variable-pitch-font :slant normal))
+
+(custom-set-faces! '(fixed-pitch :inherit doom-font :size 14))
 
 (use-package! org-journal
   :init
@@ -230,16 +227,16 @@
         )
      ))
 
-    ("r" "Reading Tasks"
-     ((todo "READING"
-        ((org-agenda-overriding-header "\nCurrently Reading")
-        (org-agenda-remove-tags t)
-        ))
-      (todo "READ"
-        ((org-agenda-overriding-header "\nTo Read")
-        (org-agenda-remove-tags t)
-        ))
-      ))
+    ;; ("r" "Reading Tasks"
+    ;;  ((todo "READING"
+    ;;     ((org-agenda-overriding-header "\nCurrently Reading")
+    ;;     (org-agenda-remove-tags t)
+    ;;     ))
+    ;;   (todo "READ"
+    ;;     ((org-agenda-overriding-header "\nTo Read")
+    ;;     (org-agenda-remove-tags t)
+    ;;     ))
+    ;;   ))
 ))
 
 (use-package! org-roam
