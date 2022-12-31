@@ -28,6 +28,8 @@
 
 (setq-default line-spacing 0.2)
 
+(setq +zen-text-scale 0.7)
+
 (setq  evil-want-fine-undo t
        undo-limit 80000000)
 
@@ -56,6 +58,7 @@
         :type '(repeat string))
 
 ;; Add frame borders and window dividers
+(after! org
 (modify-all-frames-parameters
  '((right-divider-width . 10)
    (internal-border-width . 10)))
@@ -65,6 +68,7 @@
   (face-spec-reset-face face)
   (set-face-foreground face (face-attribute 'default :background)))
 (set-face-background 'fringe (face-attribute 'default :background))
+)
 
 (add-hook! 'org-mode-hook #'mixed-pitch-mode)
 
@@ -75,17 +79,23 @@
   )
 (add-hook 'org-mode-hook 'dr/org-mode-setup)
 
+(custom-theme-set-faces
+        'user
+                '(variable-pitch ((t (:family "Source Sans Pro" :height 140 :weight regular))))
+                '(fixed-pitch ((t ( :family "MesloLGSDZ Nerd Font" :height 140)))))
+
 (after! org
   (setq
    org-hide-emphasis-markers t
    org-pretty-entities t
-   org-ellipsis " ▾"
+   org-ellipsis " ▾ "
    ;; From minad/org-modern: Edit settings
    org-auto-align-tags nil
    org-tags-column 0
    org-fold-catch-invisible-edits 'show-and-error
    org-special-ctrl-a/e t
    org-insert-heading-respect-content t
+   org-indent-indentation-per-level 1
 
    org-agenda-files '("~/notes/tasks.org"
                       "~/notes/cs61b_syllabus.org")
@@ -104,6 +114,8 @@
               (org-level-8 . 1.0)))
    (set-face-attribute (car face) nil :weight 'regular :height (cdr face)))
 )
+
+(custom-set-faces! '(org-quote :inherit doom-variable-pitch-font :slant normal))
 
 (use-package! org-journal
   :init
@@ -220,6 +232,39 @@
         ))
       ))
 ))
+
+(use-package! org-roam
+  :after org
+  :init
+  (setq org-roam-v2-ack t)
+  :custom
+  (org-roam-directory "~/notes")
+  (org-roam-capture-templates
+   '(("d" "default" plain
+      "#+filetags: %?"
+      :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+      :unnarrowed t)))
+
+  (org-roam-node-display-template
+          (concat "${title:*} "
+                  (propertize "${tags:10}" 'face 'org-tag)))
+  :config
+  (org-roam-setup))
+
+(map! :leader
+      (:prefix-map ("r" . "Org-Roam commands")
+       :desc "Toggle org-roam buffer"
+       "t" #'org-roam-buffer-toggle
+       :desc "Find or Create Node"
+       "f" #'org-roam-node-find
+       :desc "Insert Node"
+       "i" #'org-roam-node-insert
+       :desc "Create id for heading node"
+       "c" #'org-id-get-create
+       :desc "Add alias for node"
+       "a" #'org-roam-alias-add
+       )
+      )
 
 (setq fill-column 90)
 

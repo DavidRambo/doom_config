@@ -3,7 +3,7 @@
 #+startup: content
 
 * General Configuration
-** User Config
+** User Info
 #+begin_src elisp
 (setq user-full-name "David Rambo"
       user-mail-address "davidrambo@mailfence.com")
@@ -52,6 +52,11 @@ Set font face and size depending upon the system: ~gnu/linux~ for Linux, ~darwin
 ** Line spacing
 #+begin_src elisp
 (setq-default line-spacing 0.2)
+#+end_src
+
+** Zen mode
+#+begin_src elisp
+(setq +zen-text-scale 0.7)
 #+end_src
 
 ** Evil Undo
@@ -111,6 +116,7 @@ It also implements some apprearance effects as suggested by minad/org-mode.
         :type '(repeat string))
 
 ;; Add frame borders and window dividers
+(after! org
 (modify-all-frames-parameters
  '((right-divider-width . 10)
    (internal-border-width . 10)))
@@ -120,6 +126,7 @@ It also implements some apprearance effects as suggested by minad/org-mode.
   (face-spec-reset-face face)
   (set-face-foreground face (face-attribute 'default :background)))
 (set-face-background 'fringe (face-attribute 'default :background))
+)
 #+end_src
 
 ** Mixed Pitch
@@ -141,7 +148,7 @@ However, that no longer works with my configuration, so I use a mixed-pitch hook
 (add-hook 'org-mode-hook 'dr/org-mode-setup)
 #+end_src
 
-*** tecosaur's mixed-pitch-modes
+*** tecosaur's mixed-pitch-modes (not in use)
 #+begin_src elisp :tangle no
 (defvar mixed-pitch-modes '(org-mode LaTeX-mode markdown-mode)
   "Modes that `mixed-pitch-mode' should be enabled in, but only after UI initialisation.")
@@ -158,7 +165,7 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
   "Change the default face of the current buffer to a serifed variable pitch, while keeping some faces fixed pitch." t)
 #+end_src
 
-*** custom-theme-set-faces (not in use)
+*** custom-theme-set-faces
 #+begin_src elisp
 (custom-theme-set-faces
         'user
@@ -166,19 +173,20 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
                 '(fixed-pitch ((t ( :family "MesloLGSDZ Nerd Font" :height 140)))))
 #+end_src
 
-** Org Configuration
+** Org Appearance
 #+begin_src elisp
 (after! org
   (setq
    org-hide-emphasis-markers t
    org-pretty-entities t
-   org-ellipsis " ▾"
+   org-ellipsis " ▾ "
    ;; From minad/org-modern: Edit settings
    org-auto-align-tags nil
    org-tags-column 0
    org-fold-catch-invisible-edits 'show-and-error
    org-special-ctrl-a/e t
    org-insert-heading-respect-content t
+   org-indent-indentation-per-level 1
 
    org-agenda-files '("~/notes/tasks.org"
                       "~/notes/cs61b_syllabus.org")
@@ -199,6 +207,15 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
 )
 #+end_src
 
+*** remove italics in quote and verse blocks
+Since ~org-fontify-quote-and-verse-blocks~ obscures markup by making everything italic, I want either:
+a. to remove that effect or
+b. to set fontify to nil and add a background.
+The first should be the most strightforward, as it simply requires setting ~org-quote~'s ~slant~ property to ~regular~.
+#+begin_src elisp
+(custom-set-faces! '(org-quote :inherit doom-variable-pitch-font :slant normal))
+#+end_src
+Doom emacs's ~custom-set-faces!~ macro makes this trivial.
 ** Superstar (not in use)
 Org-modern provides the below functionality.
 
@@ -375,6 +392,51 @@ Alternative custom agenda views:
         ("a" "Active Tasks"
          ((todo "ACTIVE"
     	    ((org-agenda-overriding-header "Active Tasks")))))))
+** Roam
+#+begin_src elisp
+(use-package! org-roam
+  :after org
+  :init
+  (setq org-roam-v2-ack t)
+  :custom
+  (org-roam-directory "~/notes")
+  (org-roam-capture-templates
+   '(("d" "default" plain
+      "#+filetags: %?"
+      :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+      :unnarrowed t)))
+
+  (org-roam-node-display-template
+          (concat "${title:*} "
+                  (propertize "${tags:10}" 'face 'org-tag)))
+  :config
+  (org-roam-setup))
+#+end_src
+
+#+begin_src elisp
+(map! :leader
+      (:prefix-map ("r" . "Org-Roam commands")
+       :desc "Toggle org-roam buffer"
+       "t" #'org-roam-buffer-toggle
+       :desc "Find or Create Node"
+       "f" #'org-roam-node-find
+       :desc "Insert Node"
+       "i" #'org-roam-node-insert
+       :desc "Create id for heading node"
+       "c" #'org-id-get-create
+       :desc "Add alias for node"
+       "a" #'org-roam-alias-add
+       )
+      )
+#+end_src
+
+If I were to perform the keybind mappings with use-package, I think it would look like:
+
+:bind (:prefix-map ("SPC r" . "Org-Roam ")
+                ("t" . org-roam-buffer-toggle)
+                etc.)
+
+I don't know how to integrate descriptions.
 
 ** Super Agenda (not in use)
 (use-package! org-super-agenda
@@ -397,6 +459,7 @@ Alternative custom agenda views:
   :config
   (org-super-agenda-mode)
 )
+** TODO Turn off company
 ** Visual Column Mode
 #+begin_src elisp
 (setq fill-column 90)
