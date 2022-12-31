@@ -249,8 +249,8 @@ Doom emacs's ~custom-set-faces!~ macro makes this trivial.
 #+end_src
 
 ** Superstar (not in use)
-Org-modern provides the below functionality.
-
+Org-modern replaces org-superstar for me.
+#+begin_src elisp :tangle no
 (use-package! org-superstar-mode
   :custom
     org-superstar-headline-bullets-list '("◉" "○" "◌" "⁖" "◿")
@@ -276,7 +276,7 @@ Org-modern provides the below functionality.
                           ("[X]" . "☑"))
   :hook (org-mode . prettify-symbols-mode)
 )
-
+#+end_src
 ** Journal
 #+begin_src elisp
 (use-package! org-journal
@@ -471,6 +471,7 @@ If I were to perform the keybind mappings with use-package, I think it would loo
 I don't know how to integrate descriptions.
 
 ** Super Agenda (not in use)
+#+begin_src elisp :tangle no
 (use-package! org-super-agenda
   :after org-agenda
   :init
@@ -491,6 +492,7 @@ I don't know how to integrate descriptions.
   :config
   (org-super-agenda-mode)
 )
+#+end_src
 ** Turn off company
 Company's autocompletion is very annoying when writing, so I turn it off in org-mode.
 #+begin_src elisp
