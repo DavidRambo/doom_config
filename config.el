@@ -275,6 +275,8 @@
        )
       )
 
+(setq company-global-modes '(not org-mode))
+
 (setq fill-column 90)
 
 (defun center-visual-fill ()
