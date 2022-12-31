@@ -54,5 +54,4 @@
 (package! org-modern)
 (package! mixed-pitch)
 (package! visual-fill-column)
-(package! org-roam)
 (package! counsel)
