@@ -51,7 +51,7 @@ Set font face and size depending upon the system: ~gnu/linux~ for Linux, ~darwin
 
 ** Line spacing
 #+begin_src elisp
-(setq-default line-spacing 0.2)
+(setq-default line-spacing 0.1)
 #+end_src
 
 ** Zen mode

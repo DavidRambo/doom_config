@@ -14,19 +14,25 @@
   )
 (add-hook 'org-mode-hook 'dr/disable-line-numbers-hook)
 
-(setq doom-font (font-spec :family "MesloLGSDZ Nerd Font" :size 16)
-      doom-variable-pitch-font (font-spec :family "Source Sans Pro" :size 16))
+;; (setq doom-font (font-spec :family "MesloLGSDZ Nerd Font" :size 14.0)
+;;       doom-variable-pitch-font (font-spec :family "Source Sans Pro" :size 16.0))
 
-;; (cond ((eq system-type 'gnu/linux)
-;;        (setq doom-font (font-spec :family "MesloLGSDZ Nerd Font" :size 16)
-;;              doom-variable-pitch-font (font-spec :family "Source Sans Pro" :size 16))
-;;       ((eq system-type 'darwin)
-;;        (setq doom-font (font-spec :family "SauceCodePro Nerd Font Mono" :size 14)
-;;              doom-variable-pitch-font (font-spec :family "Source Sans Pro" size: 15)))))
+(cond ((eq system-type 'gnu/linux)
+        (setq doom-font (font-spec :family "SauceCodePro NF" :size 14.0)
+            doom-variable-pitch-font (font-spec :family "Source Sans Pro" :size 18.0 :weight 'regular)
+            doom-serif-font (font-spec :family "DejaVu Serif" :size 16.0)
+            doom-big-font (font-spec :size 28.0))
+       )
+      ((eq system-type 'darwin)
+        (setq doom-font (font-spec :family "SauceCodePro Nerd Font Mono" :size 16.0)
+            doom-variable-pitch-font (font-spec :family "Source Sans Pro" :size 18.0 :weight 'regular)
+            doom-serif-font (font-spec :family "PT Serif" :size 16.0)
+            doom-big-font (font-spec :size 28.0))
+       ))
 
 (setq doom-theme 'doom-vibrant)
 
-(setq-default line-spacing 0.2)
+(setq-default line-spacing 0.1)
 
 (setq +zen-text-scale 0.7)
 
