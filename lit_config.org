@@ -460,6 +460,12 @@ I don't know how to integrate descriptions.
   (org-super-agenda-mode)
 )
 ** TODO Turn off company
+Company's autocompletion is very annoying when writing, so I turn it off in org-mode.
+#+begin_src elisp
+(after! org
+  (setq company-mode nil))
+#+end_src
+
 ** Visual Column Mode
 #+begin_src elisp
 (setq fill-column 90)
