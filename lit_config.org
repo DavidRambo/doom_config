@@ -39,13 +39,13 @@ Be sure to include the decimal when declaring ~:size~.
 
 (cond ((eq system-type 'gnu/linux)
         (setq doom-font (font-spec :family "SauceCodePro NF" :size 14.0)
-            doom-variable-pitch-font (font-spec :family "Source Sans Pro" :size 18.0 :weight 'regular)
+            doom-variable-pitch-font (font-spec :family "Source Sans Pro" :size 16.0 :weight 'regular)
             doom-serif-font (font-spec :family "DejaVu Serif" :size 16.0)
             doom-big-font (font-spec :size 28.0))
        )
       ((eq system-type 'darwin)
         (setq doom-font (font-spec :family "SauceCodePro Nerd Font Mono" :size 16.0)
-            doom-variable-pitch-font (font-spec :family "Source Sans Pro" :size 18.0 :weight 'regular)
+            doom-variable-pitch-font (font-spec :family "Source Sans Pro" :size 16.0 :weight 'regular)
             doom-serif-font (font-spec :family "PT Serif" :size 16.0)
             doom-big-font (font-spec :size 28.0))
        ))
@@ -66,6 +66,12 @@ Be sure to include the decimal when declaring ~:size~.
 (setq +zen-text-scale 0.7)
 #+end_src
 
+** Esc always quits
+In some prompts and in key sequences, ESC is registered as a potential entry.
+This effectively renders it equivalent to C-g.
+#+begin_src elisp
+(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+#+end_src
 ** Evil Undo
 #+begin_src elisp
 (setq  evil-want-fine-undo t
@@ -151,33 +157,10 @@ It also implements some apprearance effects as suggested by minad/org-mode.
 
 ** Mixed Pitch
 Getting variable fonts to load in org-mode with doom has always been a challenge.
-I have never been able to reliably access doom's own variable-pitch font.
-The two approaches not in use would work but the font sizes would be off.
-I used to use tecosaur's configuration.
-However, that no longer works with my configuration, so I use a mixed-pitch hook and set the variable-pitch face directly.
-
-*** mixed-pitch
+I have never been able to reliably access doom's own variable-pitch font within mixed-pitch-mode settings.
+I use tecosaur's configuration.
+*** tecosaur's mixed-pitch-modes
 #+begin_src elisp
-(use-package! mixed-pitch
-  :hook
-  (org-mode . mixed-pitch-mode))
-
-;; (custom-set-faces! '(variable-pitch :height 160))
-#+end_src
-
-#+begin_src elisp :tangle no
-(add-hook! 'org-mode-hook #'mixed-pitch-mode)
-
-(defun dr/org-mode-setup ()
-  (variable-pitch-mode 1)
-  (set-face-attribute 'variable-pitch nil :height 150)
-  (hl-line-mode nil)
-  )
-(add-hook 'org-mode-hook 'dr/org-mode-setup)
-#+end_src
-
-*** tecosaur's mixed-pitch-modes (not in use)
-#+begin_src elisp :tangle no
 (defvar mixed-pitch-modes '(org-mode LaTeX-mode markdown-mode)
   "Modes that `mixed-pitch-mode' should be enabled in, but only after UI initialisation.")
 (defun init-mixed-pitch-h ()
@@ -191,6 +174,66 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
 
 (autoload #'mixed-pitch-serif-mode "mixed-pitch"
   "Change the default face of the current buffer to a serifed variable pitch, while keeping some faces fixed pitch." t)
+
+(after! mixed-pitch
+
+      (setq mixed-pitch-set-height t)
+      (setq variable-pitch (font-spec :family "SauceCodePro Nerd Font"))
+      (cond ((eq system-type 'gnu/linux)
+            (set-face-attribute 'variable-pitch nil :height 170)
+             )
+            ((eq system-type 'darwin)
+            (set-face-attribute 'variable-pitch nil :height 180)
+             )
+        )
+
+  (defun mixed-pitch-sans-mode (&optional arg)
+    "Change the default face of the current buffer to a sans-serif variable pitch."
+    (interactive)
+    (let ((mixed-pitch-face 'variable-pitch))
+      (mixed-pitch-mode (or arg 'toggle))))
+
+  (defface variable-pitch-serif
+    '((t (:family "serif")))
+    "A variable-pitch face with serifs."
+    :group 'basic-faces)
+
+  (setq mixed-pitch-set-height t)
+  (cond ((eq system-type 'gnu/linux)
+        (setq variable-pitch-serif-font (font-spec :family "Palatino Linotype" :size 18.0))
+       )
+      ((eq system-type 'darwin)
+        (setq variable-pitch-serif-font (font-spec :family "Palatino" :size 18.0)))
+  )
+  (set-face-attribute 'variable-pitch-serif nil :font variable-pitch-serif-font)
+
+  (defun mixed-pitch-serif-mode (&optional arg)
+    "Change the default face of the current buffer to a serifed variable pitch, while keeping some faces fixed pitch."
+    (interactive)
+    (let ((mixed-pitch-face 'variable-pitch-serif))
+      (mixed-pitch-mode (or arg 'toggle))))
+)
+#+end_src
+
+*** simple mixed-pitch (not in use)
+#+begin_src elisp :tangle no
+(use-package! mixed-pitch
+  :hook
+  (org-mode . mixed-pitch-mode))
+
+;; (custom-set-faces! '(variable-pitch :height 160))
+#+end_src
+
+Unnecessary alternative approach:
+#+begin_src elisp :tangle no
+(add-hook! 'org-mode-hook #'mixed-pitch-mode)
+
+(defun dr/org-mode-setup ()
+  (variable-pitch-mode 1)
+  (set-face-attribute 'variable-pitch nil :height 150)
+  (hl-line-mode nil)
+  )
+(add-hook 'org-mode-hook 'dr/org-mode-setup)
 #+end_src
 
 *** custom-theme-set-faces (not in use)
@@ -201,7 +244,7 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
                 '(fixed-pitch ((t ( :family "MesloLGSDZ Nerd Font" :height 140)))))
 #+end_src
 
-#+begin_src elisp
+#+begin_src elisp :tangle no
 (custom-set-faces!
   '(variable-pitch :family "Source Sans Pro" :height 140 :weight regular))
 #+end_src
@@ -220,9 +263,6 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
    org-special-ctrl-a/e t
    org-insert-heading-respect-content t
    org-indent-indentation-per-level 2
-
-   org-agenda-files '("~/notes/tasks.org"
-                      "~/notes/cs61b_syllabus.org")
    org-startup-folded 'content
    )
 
@@ -247,6 +287,7 @@ b. to set fontify to nil and add a background.
 The first should be the most strightforward, as it simply requires setting ~org-quote~'s ~slant~ property to ~regular~.
 #+begin_src elisp
 (custom-set-faces! '(org-quote :inherit doom-variable-pitch-font :slant normal))
+(setq org-fontify-whole-block-delimiter-line nil)
 #+end_src
 Doom emacs's ~custom-set-faces!~ macro makes this trivial.
 
@@ -300,8 +341,10 @@ Org-modern replaces org-superstar for me.
 #+end_src
 
 ** Agenda
+*** Set agenda files
 #+begin_src elisp
-(setq org-agenda-files '("~/notes/tasks.org"))
+(setq org-agenda-files '("~/notes/tasks.org"
+                         "~/notes/cs61b_syllabus.org"))
 #+end_src
 
 *** Keywords
@@ -358,7 +401,7 @@ Org-modern replaces org-superstar for me.
         ))
 #+end_src
 
-*** Set ~org-agenda-files~ and custom commands that show up with "SPC o A":
+*** Set custom commands that show up with "SPC o A":
 
 #+begin_src elisp
 (setq org-agenda-custom-commands
