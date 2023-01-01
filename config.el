@@ -299,6 +299,10 @@
   (find-file-existing "~/notes/hours-log.org"))
 (global-set-key (kbd "C-c h") 'open-hours-log)
 
+(map! :leader
+      :desc "Toggle narrow subtree"
+      "t n" #'org-toggle-narrow-to-subtree)
+
 (defun efs/org-babel-tangle-config ()
   (when (string-equal (buffer-file-name)
                       (expand-file-name "~/.config/emacs-from-scratch/config.org"))
