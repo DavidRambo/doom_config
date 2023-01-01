@@ -546,6 +546,13 @@ Function to open hours-log.org plus mapping to open.
       :desc "Toggle narrow subtree"
       "t n" #'org-toggle-narrow-to-subtree)
 #+end_src
+*** Fix =z o= to open fold
+=z o= stopped working to call ~+org/open-fold~.
+One workaround is to override fold-open in org mode ([[https://github.com/doomemacs/doomemacs/issues/6737#issuecomment-1265815504][source]]).
+#+begin_src elisp
+(map! :after evil-org :map evil-org-mode-map
+      :nv "z o" #'evil-open-fold)
+#+end_src
 ** Auto-tangle
 #+begin_src elisp
 (defun efs/org-babel-tangle-config ()

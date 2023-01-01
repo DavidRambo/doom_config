@@ -303,6 +303,9 @@
       :desc "Toggle narrow subtree"
       "t n" #'org-toggle-narrow-to-subtree)
 
+(map! :after evil-org :map evil-org-mode-map
+      :nv "z o" #'evil-open-fold)
+
 (defun efs/org-babel-tangle-config ()
   (when (string-equal (buffer-file-name)
                       (expand-file-name "~/.config/emacs-from-scratch/config.org"))
