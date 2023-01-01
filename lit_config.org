@@ -102,13 +102,19 @@ https://github.com/doomemacs/doomemacs/issues/6478#issuecomment-1219582005
 (define-key evil-normal-state-map (kbd "go") 'counsel-outline)
 #+end_src
 
-** Avy (not in use)
+** Avy
+Per tecosaur's configuration, this sets Avy's character prompts to letters in Colemak's homerow:
+#+begin_src elisp
+(after! avy
+  ;; home row priorities: 8 6 4 5 - - 1 2 3 7
+  (setq avy-keys '(?t ?e ?i ?s ?r ?o ?a ?n)))
+#+end_src
 The below keymaps approximate leap.nvim's behavior.
 Leap combines evil-snipe's immediate jump with avy's shortcut prompts.
 For now I am using doom's builtin approach: snipe to the first character and then use either ~;~ and ~,~ (to traverse matches) or ~C-;~ (to show avy's prompts).
-#+begin_src elisp
-;; (define-key evil-normal-state-map (kbd "s") 'avy-goto-char-2-below)
-;; (define-key evil-normal-state-map (kbd "S") 'avy-goto-char-2-above)
+#+begin_src elisp :tangle no
+(define-key evil-normal-state-map (kbd "s") 'avy-goto-char-2-below)
+(define-key evil-normal-state-map (kbd "S") 'avy-goto-char-2-above)
 #+end_src
 
 * Org Mode
@@ -303,7 +309,7 @@ Org-modern replaces org-superstar for me.
 (after! org
 
   (setq org-todo-keywords
-        '((sequence "TODO(t)" "NEXT(n)" "ACTIVE(a)" "|" "DONE(d!)")
+        '((sequence "TODO(t)" "NEXT(n)" "ACTIVE(a)" "|" "DONE(d)")
           (sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "REVIEW(v)" "WAIT(w@/!)" "|" "COMPLETED(c)" "CANCELLED(k@)")))
 
    ;; Agenda styling
@@ -514,7 +520,7 @@ Company's autocompletion is very annoying when writing, so I turn it off in org-
       "W" #'visual-fill-column-mode)
 #+end_src
 
-** Org File Mappings
+** Org Mappings
 *** Open Task File
 Function to open tasks.org plus mapping.
 #+begin_src elisp
@@ -534,7 +540,12 @@ Function to open hours-log.org plus mapping to open.
   (find-file-existing "~/notes/hours-log.org"))
 (global-set-key (kbd "C-c h") 'open-hours-log)
  #+end_src
-
+*** Toggle subtree narrow
+#+begin_src elisp
+(map! :leader
+      :desc "Toggle narrow subtree"
+      "t n" #'org-toggle-narrow-to-subtree)
+#+end_src
 ** Auto-tangle
 #+begin_src elisp
 (defun efs/org-babel-tangle-config ()
