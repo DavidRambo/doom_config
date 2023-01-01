@@ -53,8 +53,9 @@
 
 (define-key evil-normal-state-map (kbd "go") 'counsel-outline)
 
-;; (define-key evil-normal-state-map (kbd "s") 'avy-goto-char-2-below)
-;; (define-key evil-normal-state-map (kbd "S") 'avy-goto-char-2-above)
+(after! avy
+  ;; home row priorities: 8 6 4 5 - - 1 2 3 7
+  (setq avy-keys '(?t ?e ?i ?s ?r ?o ?a ?n)))
 
 (setq org-directory "~/notes/")
 
