@@ -64,7 +64,13 @@ Be sure to include the decimal when declaring ~:size~.
 #+begin_src elisp
 (setq-default line-spacing 0.1)
 #+end_src
-
+** Navigate visual lines
+#+begin_src elisp
+(define-key evil-normal-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
+(define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
+(define-key evil-motion-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
+(define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
+#+end_src
 ** Zen mode
 #+begin_src elisp
 (setq +zen-text-scale 0.7)
@@ -399,6 +405,7 @@ Org-modern replaces org-superstar for me.
 (setq org-agenda-category-icon-alist
       `(("Postdoc" ,(fw/agenda-icon-octicon "pencil") nil nil :ascent center)
         ("Coding" ,(fw/agenda-icon-faicon "code") nil nil :ascent center)
+        ("CS61B" ,(fw/agenda-icon-faicon "code") nil nil :ascent center)
         ("FRG" ,(fw/agenda-icon-octicon "book") nil nil :ascent center)
         ("Home" ,(fw/agenda-icon-octicon "home") nil nil :ascent center)
         ("Habits" ,(fw/agenda-icon-faicon "calendar-check-o") nil nil :ascent center)
