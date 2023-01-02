@@ -9,7 +9,7 @@
       user-mail-address "davidrambo@mailfence.com")
 #+end_src
 
-** Fringe and Line Numbers
+** Line Numbers
 *** Enable line numbers for programming and text modes.
 #+begin_src elisp
 (setq display-line-numbers-type 'relative)
@@ -29,7 +29,11 @@ Create a function and a hook to disable line numbers in org mode.
   )
 (add-hook 'org-mode-hook 'dr/disable-line-numbers-hook)
 #+end_src
-
+*** Highlight Line
+Turn off global line highlight.
+#+begin_src elisp
+(remove-hook 'doom-first-buffer-hook #'global-hl-line-mode)
+#+end_src
 ** Fonts
 Set font face and size depending upon the system: ~gnu/linux~ for Linux, ~darwin~ for MacOS.
 Be sure to include the decimal when declaring ~:size~.
