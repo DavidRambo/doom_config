@@ -294,7 +294,6 @@ Unnecessary alternative approach:
    (set-face-attribute (car face) nil :weight 'regular :height (cdr face)))
 )
 #+end_src
-
 *** remove italics in quote and verse blocks
 Since ~org-fontify-quote-and-verse-blocks~ obscures markup by making everything italic, I want either:
 a. to remove that effect or
@@ -309,7 +308,10 @@ Doom emacs's ~custom-set-faces!~ macro makes this trivial.
 #+begin_src elisp
 (custom-set-faces! '(fixed-pitch :inherit doom-font :size 14))
 #+end_src
-
+*** reveal emphasis markers when editing
+#+begin_src elisp
+(add-hook! 'org-mode #'org-appear-mode)
+#+end_src
 ** Superstar (not in use)
 Org-modern replaces org-superstar for me.
 #+begin_src elisp :tangle no

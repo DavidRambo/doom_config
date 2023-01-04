@@ -52,6 +52,7 @@
 (package! org-bullets)
 (package! org-super-agenda)
 (package! org-modern)
+(package! org-appear)
 (package! mixed-pitch)
 (package! visual-fill-column)
 (package! counsel)

@@ -178,6 +178,8 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
 
 (custom-set-faces! '(fixed-pitch :inherit doom-font :size 14))
 
+(add-hook! 'org-mode #'org-appear-mode)
+
 (use-package! org-journal
   :init
   (setq org-journal-dir "~/journal/"
