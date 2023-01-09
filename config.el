@@ -213,17 +213,15 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
    org-agenda-current-time-string
    "⭠ now ─────────────────────────────────────────────────")
 
- ;;    (setq org-todo-keyword-faces
- ;;      '(("TODO" . (:foreground "#FB4934" :weight regular))
- ;;        ("NEXT" . (:foreground "#458588" :slant italic))
- ;;        ("ACTIVE" . (:foreground "#076678" :slant italic))
- ;;        ("DONE" . (:foreground "#8EC07C" :weight light :strike-through t))
- ;;        ("READ" . (:foreground "#b16286" :weight regular))
- ;;        ("READING" . (:foreground "#8f3f71" :weight regular))
- ;;        ("WAITING" . (:foreground "black" :weight light))
- ;;   )
- ;; )
-)
+  (setq org-modern-todo-faces
+    '(("TODO" . (:foreground "#1c1f24" :background "#e06c75" :weight regular))
+      ("NEXT" . (:foreground "#1c1f24" :background "#e5c07b" :slant italic))
+      ("ACTIVE" . (:foreground "#1c1f24" :background "#98c379" :slant italic))
+      ("DONE" . (:foreground "#1c1f24" :background "#56b6c2" :weight light :strike-through t))))
+  )
+ ;;      ("READ" . (:foreground "#b16286" :weight regular))
+ ;;      ("READING" . (:foreground "#8f3f71" :weight regular))
+ ;;      ("WAITING" . (:foreground "black" :weight light))))
 
 (defun fw/agenda-icon-octicon (name)
   "Returns an all-the-icons-octicon icon"
