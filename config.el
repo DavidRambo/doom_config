@@ -32,7 +32,8 @@
             doom-big-font (font-spec :size 28.0))
        ))
 
-(setq doom-theme 'doom-vibrant)
+(setq doom-theme 'catppuccin
+      catppuccin-flavor 'macchiato)
 
 (setq-default line-spacing 0.1)
 
@@ -271,10 +272,12 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
      (
       (tags-todo "+postdoc-jobs"
         ((org-agenda-overriding-header "\nPostdoc Tasks")))
-      (tags-todo "book"
-        ((org-agenda-overriding-header "\nBook Tasks")))
-      (tags-todo "jobs"
-        ((org-agenda-overriding-header "\nJob Application Tasks")))
+      ;; (tags-todo "book"
+      ;;   ((org-agenda-overriding-header "\nBook Tasks")))
+      ;; (tags-todo "jobs"
+      ;;   ((org-agenda-overriding-header "\nJob Application Tasks")))
+      (tags-todo "+coding"
+        ((org-agenda-overriding-header "\nProgramming Tasks")))
      ))
 
     ("b" "Book-related tasks"

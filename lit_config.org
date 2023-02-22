@@ -57,7 +57,8 @@ Be sure to include the decimal when declaring ~:size~.
 
 ** Theme
 #+begin_src elisp
-(setq doom-theme 'doom-vibrant)
+(setq doom-theme 'catppuccin
+      catppuccin-flavor 'macchiato)
 #+end_src
 
 ** Line spacing
@@ -448,10 +449,12 @@ Org-modern replaces org-superstar for me.
      (
       (tags-todo "+postdoc-jobs"
         ((org-agenda-overriding-header "\nPostdoc Tasks")))
-      (tags-todo "book"
-        ((org-agenda-overriding-header "\nBook Tasks")))
-      (tags-todo "jobs"
-        ((org-agenda-overriding-header "\nJob Application Tasks")))
+      ;; (tags-todo "book"
+      ;;   ((org-agenda-overriding-header "\nBook Tasks")))
+      ;; (tags-todo "jobs"
+      ;;   ((org-agenda-overriding-header "\nJob Application Tasks")))
+      (tags-todo "+coding"
+        ((org-agenda-overriding-header "\nProgramming Tasks")))
      ))
 
     ("b" "Book-related tasks"
