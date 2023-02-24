@@ -48,7 +48,7 @@ Be sure to include the decimal when declaring ~:size~.
             doom-big-font (font-spec :size 28.0))
        )
       ((eq system-type 'darwin)
-        (setq doom-font (font-spec :family "SauceCodePro Nerd Font Mono" :size 16.0)
+        (setq doom-font (font-spec :family "SauceCodePro Nerd Font Mono" :size 14.0)
             doom-variable-pitch-font (font-spec :family "Source Sans Pro" :size 16.0 :weight 'regular)
             doom-serif-font (font-spec :family "PT Serif" :size 16.0)
             doom-big-font (font-spec :size 28.0))
@@ -559,6 +559,12 @@ I don't know how to integrate descriptions.
   :config
   (org-super-agenda-mode)
 )
+#+end_src
+** Turn off git-gutter
+Git-gutter-mode messes with the visual line traversal, so I turn it off in org-mode.
+#+begin_src elisp
+(after! git-gutter
+  (setq git-gutter:disabled-modes '(org-mode image-mode)))
 #+end_src
 ** Turn off company
 Company's autocompletion is very annoying when writing, so I turn it off in org-mode.

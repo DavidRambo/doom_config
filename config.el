@@ -26,7 +26,7 @@
             doom-big-font (font-spec :size 28.0))
        )
       ((eq system-type 'darwin)
-        (setq doom-font (font-spec :family "SauceCodePro Nerd Font Mono" :size 16.0)
+        (setq doom-font (font-spec :family "SauceCodePro Nerd Font Mono" :size 14.0)
             doom-variable-pitch-font (font-spec :family "Source Sans Pro" :size 16.0 :weight 'regular)
             doom-serif-font (font-spec :family "PT Serif" :size 16.0)
             doom-big-font (font-spec :size 28.0))
@@ -331,6 +331,9 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
        "a" #'org-roam-alias-add
        )
       )
+
+(after! git-gutter
+  (setq git-gutter:disabled-modes '(org-mode image-mode)))
 
 (setq company-global-modes '(not org-mode))
 
