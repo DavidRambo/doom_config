@@ -58,7 +58,8 @@ Be sure to include the decimal when declaring ~:size~.
 ** Theme
 #+begin_src elisp
 (setq doom-theme 'catppuccin
-      catppuccin-flavor 'macchiato)
+      catppuccin-flavor 'macchiato
+      catppuccin-enlarge-headings 'nil)
 #+end_src
 
 ** Line spacing

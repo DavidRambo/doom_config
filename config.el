@@ -33,7 +33,8 @@
        ))
 
 (setq doom-theme 'catppuccin
-      catppuccin-flavor 'macchiato)
+      catppuccin-flavor 'macchiato
+      catppuccin-enlarge-headings 'nil)
 
 (setq-default line-spacing 0.1)
 
