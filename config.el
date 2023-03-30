@@ -195,8 +195,7 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
   (setq org-journal-enable-agenda-integration nil)
 )
 
-(setq org-agenda-files '("~/notes/tasks.org"
-                         "~/notes/cs61b_syllabus.org"))
+(setq org-agenda-files '("~/notes/tasks.org"))
 
 (after! org
 

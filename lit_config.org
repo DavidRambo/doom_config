@@ -361,8 +361,7 @@ Org-modern replaces org-superstar for me.
 ** Agenda
 *** Set agenda files
 #+begin_src elisp
-(setq org-agenda-files '("~/notes/tasks.org"
-                         "~/notes/cs61b_syllabus.org"))
+(setq org-agenda-files '("~/notes/tasks.org"))
 #+end_src
 
 *** Keywords
