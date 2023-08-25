@@ -312,6 +312,22 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
       :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
       :unnarrowed t)))
 
+  ;; directory is relative to org-roam-directory
+  (org-roam-dailies-directory "../journal/")
+
+  (org-roam-dailies-capture-templates
+   '(("d" "default" entry "* %<%I:%M %p>\n%?"
+     :target (file+head "%<%Y-%m-%d>.org"
+                        "#+title: %<%B %d, %Y (%A)>\n")
+     :if-new (file+head "%<%Y-%m-%d>.org"
+                        "#+title: %<%B %d, %Y (%A)>\n* Sleep Diary - %<%I:%M %p>\n1. ")
+     ;; :unnarrowed t
+     )
+    ;; ("s" "sleep diary" entry "* Sleep Diary - %<%I:%M %p>\n1. %?"
+    ;;  :target (file+head "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n"))
+    )
+   )
+
   (org-roam-node-display-template
           (concat "${title:*} "
                   (propertize "${tags:10}" 'face 'org-tag)))
@@ -330,6 +346,10 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
        "c" #'org-id-get-create
        :desc "Add alias for node"
        "a" #'org-roam-alias-add
+       :desc "Dailies capture map"
+       "d" #'org-roam-dailies-map
+       :desc "Capture daily journal"
+       "j" #'org-roam-dailies-capture-today
        )
       )
 
