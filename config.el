@@ -1,6 +1,8 @@
 (setq user-full-name "David Rambo"
       user-mail-address "davidrambo@mailfence.com")
 
+(setq default-frame-alist '((undecorated .t)))
+
 (setq display-line-numbers-type 'relative)
 
 (defun dr/display-line-numbers-hook ()
@@ -22,7 +24,7 @@
 (cond ((eq system-type 'gnu/linux)
         (setq doom-font (font-spec :family "SauceCodePro NF" :size 14.0)
             doom-variable-pitch-font (font-spec :family "Source Sans Pro" :size 16.0 :weight 'regular)
-            doom-serif-font (font-spec :family "DejaVu Serif" :size 16.0)
+            doom-serif-font (font-spec :family "Palatino Linotype" :size 16.0)
             doom-big-font (font-spec :size 28.0))
        )
       ((eq system-type 'darwin)
@@ -195,8 +197,7 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
   (setq org-journal-enable-agenda-integration nil)
 )
 
-(setq org-agenda-files '("~/notes/tasks.org"
-                         "~/notes/cs61b_syllabus.org"))
+(setq org-agenda-files '("~/notes/tasks.org"))
 
 (after! org
 
