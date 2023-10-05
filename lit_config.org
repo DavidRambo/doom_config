@@ -366,7 +366,8 @@ Org-modern replaces org-superstar for me.
 ** Agenda
 *** Set agenda files
 #+begin_src elisp
-(setq org-agenda-files '("~/notes/tasks.org"))
+(setq org-agenda-files '("~/notes/tasks.org"
+                         "~/repos/nuzzle-notes/todo.org"))
 #+end_src
 
 *** Keywords
@@ -402,23 +403,24 @@ Org-modern replaces org-superstar for me.
 *** org-agenda icons
 
 #+begin_src elisp
-(defun fw/agenda-icon-octicon (name)
-  "Returns an all-the-icons-octicon icon"
-  (list (all-the-icons-octicon name)))
+;; This used to use all-the-icons- functions.
+;; (defun fw/agenda-icon-octicon (name)
+;;   "Returns an all-the-icons-octicon icon"
+;;   (list (nerd-icons-octicon name)))
 
-(defun fw/agenda-icon-faicon (name)
-  "Returns an all-the-icons-faicon icon"
-  (list (all-the-icons-faicon name)))
+;; (defun fw/agenda-icon-faicon (name)
+;;   "Returns an all-the-icons-faicon icon"
+;;   (list (nerd-icons-faicon name)))
 
 ;; The strings listed first ("Postdoc", etc.) refer to the categories under headings in my tasks.org file.
 ;; https://old.reddit.com/r/emacs/comments/hnf3cw/my_orgmode_agenda_much_better_now_with_category/
 (setq org-agenda-category-icon-alist
-      `(("Postdoc" ,(fw/agenda-icon-octicon "pencil") nil nil :ascent center)
-        ("Coding" ,(fw/agenda-icon-faicon "code") nil nil :ascent center)
-        ("CS61B" ,(fw/agenda-icon-faicon "code") nil nil :ascent center)
-        ("FRG" ,(fw/agenda-icon-octicon "book") nil nil :ascent center)
-        ("Home" ,(fw/agenda-icon-octicon "home") nil nil :ascent center)
-        ("Habits" ,(fw/agenda-icon-faicon "calendar-check-o") nil nil :ascent center)
+      `(("Postdoc" ,(nerd-icons-octicon "nf-oct-pencil") nil nil :ascent center)
+        ("Coding" ,(nerd-icons-faicon "nf-fa-code") nil nil :ascent center)
+        ("CS61B" ,(nerd-icons-faicon "nf-fa-code") nil nil :ascent center)
+        ("FRG" ,(nerd-icons-octicon "nf-oct-book") nil nil :ascent center)
+        ("Home" ,(nerd-icons-octicon "nf-oct-home") nil nil :ascent center)
+        ("Habits" ,(nerd-icons-faicon "nf-fa-calendar_check_o") nil nil :ascent center)
         ))
 #+end_src
 
