@@ -243,24 +243,12 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
  ;;      ("READING" . (:foreground "#8f3f71" :weight regular))
  ;;      ("WAITING" . (:foreground "black" :weight light))))
 
-;; This used to use all-the-icons- functions.
-;; (defun fw/agenda-icon-octicon (name)
-;;   "Returns an all-the-icons-octicon icon"
-;;   (list (nerd-icons-octicon name)))
-
-;; (defun fw/agenda-icon-faicon (name)
-;;   "Returns an all-the-icons-faicon icon"
-;;   (list (nerd-icons-faicon name)))
-
-;; The strings listed first ("Postdoc", etc.) refer to the categories under headings in my tasks.org file.
-;; https://old.reddit.com/r/emacs/comments/hnf3cw/my_orgmode_agenda_much_better_now_with_category/
 (setq org-agenda-category-icon-alist
       `(("Postdoc" ,(nerd-icons-octicon "nf-oct-pencil") nil nil :ascent center)
         ("Coding" ,(nerd-icons-faicon "nf-fa-code") nil nil :ascent center)
-        ("CS61B" ,(nerd-icons-faicon "nf-fa-code") nil nil :ascent center)
-        ("FRG" ,(nerd-icons-octicon "nf-oct-book") nil nil :ascent center)
         ("Home" ,(nerd-icons-octicon "nf-oct-home") nil nil :ascent center)
         ("Habits" ,(nerd-icons-faicon "nf-fa-calendar_check_o") nil nil :ascent center)
+        ("Nuzzle" ,(nerd-icons-mdicon "nf-md-cat") nil nil :ascent center)
         ))
 
 (setq org-agenda-custom-commands
@@ -290,22 +278,13 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
 
     ("w" "Work-related tasks"
      (
-      ;; (tags-todo "+postdoc-jobs"
-      ;;   ((org-agenda-overriding-header "\nPostdoc Tasks")))
-      ;; (tags-todo "book"
-      ;;   ((org-agenda-overriding-header "\nBook Tasks")))
       ;; (tags-todo "jobs"
       ;;   ((org-agenda-overriding-header "\nJob Application Tasks")))
+      (tags-todo "+nuzzle"
+        ((org-agenda-overriding-header "\nNuzzle Tasks")))
       (tags-todo "+coding"
         ((org-agenda-overriding-header "\nProgramming Tasks")))
      ))
-
-    ;; ("b" "Book-related tasks"
-    ;;  ( tags-todo "book"
-    ;;     ((org-agenda-overriding-header "\nBook Tasks")
-    ;;     (org-agenda-remove-tags t)
-    ;;     )
-    ;;  ))
 
     ;; ("r" "Reading Tasks"
     ;;  ((todo "READING"
