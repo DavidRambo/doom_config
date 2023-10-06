@@ -194,10 +194,9 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
    (set-face-attribute (car face) nil :weight 'regular :height (cdr face)))
 )
 
-(custom-set-faces! '(org-quote :inherit doom-variable-pitch-font :slant normal))
+(custom-set-faces!
+  '(org-quote :inherit doom-variable-pitch-font :slant normal))
 (setq org-fontify-whole-block-delimiter-line nil)
-
-(custom-set-faces! '(fixed-pitch :inherit doom-font :size 14))
 
 (add-hook! 'org-mode #'org-appear-mode)
 

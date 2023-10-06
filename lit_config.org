@@ -287,8 +287,8 @@ Unnecessary alternative approach:
 #+begin_src elisp :tangle no
 (custom-theme-set-faces
         'user
-                '(variable-pitch ((t (:family "Source Sans Pro" :height 140 :weight regular))))
-                '(fixed-pitch ((t ( :family "MesloLGSDZ Nerd Font" :height 140)))))
+            '(variable-pitch ((t (:family "Source Sans Pro" :height 140 :weight regular))))
+            '(fixed-pitch ((t ( :family "MesloLGSDZ Nerd Font" :height 140)))))
 #+end_src
 
 #+begin_src elisp :tangle no
@@ -332,13 +332,15 @@ a. to remove that effect or
 b. to set fontify to nil and add a background.
 The first should be the most strightforward, as it simply requires setting ~org-quote~'s ~slant~ property to ~regular~.
 #+begin_src elisp
-(custom-set-faces! '(org-quote :inherit doom-variable-pitch-font :slant normal))
+(custom-set-faces!
+  '(org-quote :inherit doom-variable-pitch-font :slant normal))
 (setq org-fontify-whole-block-delimiter-line nil)
 #+end_src
 Doom emacs's ~custom-set-faces!~ macro makes this trivial.
 
-#+begin_src elisp
-(custom-set-faces! '(fixed-pitch :inherit doom-font :size 14))
+#+begin_src elisp :tangle no
+(custom-set-faces!
+  '(fixed-pitch :inherit doom-font :size 14))
 #+end_src
 *** reveal emphasis markers when editing
 #+begin_src elisp
