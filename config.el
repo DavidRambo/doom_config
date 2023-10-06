@@ -18,11 +18,8 @@
 
 (remove-hook 'doom-first-buffer-hook #'global-hl-line-mode)
 
-;; (setq doom-font (font-spec :family "MesloLGSDZ Nerd Font" :size 14.0)
-;;       doom-variable-pitch-font (font-spec :family "Source Sans Pro" :size 16.0))
-
 (cond ((eq system-type 'gnu/linux)
-        (setq doom-font (font-spec :family "SauceCodePro NF" :size 14.0)
+        (setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 13.0)
             doom-variable-pitch-font (font-spec :family "Source Sans Pro" :size 16.0 :weight 'regular)
             doom-serif-font (font-spec :family "Palatino Linotype" :size 16.0)
             doom-big-font (font-spec :size 28.0))
@@ -60,6 +57,10 @@
 
 (setq split-height-threshold nil)
 (setq split-width-threshold 0)
+
+(custom-set-faces!
+  '(doom-modeline-buffer-modified :foreground "orange"))
+(setq doom-modeline-height 35)
 
 (after! evil
   (evil-select-search-module 'evil-search-module 'isearch))
@@ -147,6 +148,22 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
     (interactive)
     (let ((mixed-pitch-face 'variable-pitch-serif))
       (mixed-pitch-mode (or arg 'toggle))))
+
+(defadvice! +org-indent--reduced-text-prefixes ()
+  :after #'org-indent--compute-prefixes
+  (setq org-indent--text-line-prefixes
+        (make-vector org-indent--deepest-level nil))
+  (when (> org-indent-indentation-per-level 0)
+    (dotimes (n org-indent--deepest-level)
+      (aset org-indent--text-line-prefixes
+            n
+            (org-add-props
+                (concat (make-string (* n (1- org-indent-indentation-per-level))
+                                     ?\s)
+                        (if (> n 0)
+                             (char-to-string org-indent-boundary-char)
+                          "\u200b"))
+                nil 'face 'org-indent)))))
 )
 
 (after! org
@@ -197,7 +214,8 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
   (setq org-journal-enable-agenda-integration nil)
 )
 
-(setq org-agenda-files '("~/notes/tasks.org"))
+(setq org-agenda-files '("~/notes/tasks.org"
+                         "~/repos/nuzzle-notes/todo.org"))
 
 (after! org
 
@@ -226,23 +244,24 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
  ;;      ("READING" . (:foreground "#8f3f71" :weight regular))
  ;;      ("WAITING" . (:foreground "black" :weight light))))
 
-(defun fw/agenda-icon-octicon (name)
-  "Returns an all-the-icons-octicon icon"
-  (list (all-the-icons-octicon name)))
+;; This used to use all-the-icons- functions.
+;; (defun fw/agenda-icon-octicon (name)
+;;   "Returns an all-the-icons-octicon icon"
+;;   (list (nerd-icons-octicon name)))
 
-(defun fw/agenda-icon-faicon (name)
-  "Returns an all-the-icons-faicon icon"
-  (list (all-the-icons-faicon name)))
+;; (defun fw/agenda-icon-faicon (name)
+;;   "Returns an all-the-icons-faicon icon"
+;;   (list (nerd-icons-faicon name)))
 
 ;; The strings listed first ("Postdoc", etc.) refer to the categories under headings in my tasks.org file.
 ;; https://old.reddit.com/r/emacs/comments/hnf3cw/my_orgmode_agenda_much_better_now_with_category/
 (setq org-agenda-category-icon-alist
-      `(("Postdoc" ,(fw/agenda-icon-octicon "pencil") nil nil :ascent center)
-        ("Coding" ,(fw/agenda-icon-faicon "code") nil nil :ascent center)
-        ("CS61B" ,(fw/agenda-icon-faicon "code") nil nil :ascent center)
-        ("FRG" ,(fw/agenda-icon-octicon "book") nil nil :ascent center)
-        ("Home" ,(fw/agenda-icon-octicon "home") nil nil :ascent center)
-        ("Habits" ,(fw/agenda-icon-faicon "calendar-check-o") nil nil :ascent center)
+      `(("Postdoc" ,(nerd-icons-octicon "nf-oct-pencil") nil nil :ascent center)
+        ("Coding" ,(nerd-icons-faicon "nf-fa-code") nil nil :ascent center)
+        ("CS61B" ,(nerd-icons-faicon "nf-fa-code") nil nil :ascent center)
+        ("FRG" ,(nerd-icons-octicon "nf-oct-book") nil nil :ascent center)
+        ("Home" ,(nerd-icons-octicon "nf-oct-home") nil nil :ascent center)
+        ("Habits" ,(nerd-icons-faicon "nf-fa-calendar_check_o") nil nil :ascent center)
         ))
 
 (setq org-agenda-custom-commands
@@ -272,8 +291,8 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
 
     ("w" "Work-related tasks"
      (
-      (tags-todo "+postdoc-jobs"
-        ((org-agenda-overriding-header "\nPostdoc Tasks")))
+      ;; (tags-todo "+postdoc-jobs"
+      ;;   ((org-agenda-overriding-header "\nPostdoc Tasks")))
       ;; (tags-todo "book"
       ;;   ((org-agenda-overriding-header "\nBook Tasks")))
       ;; (tags-todo "jobs"
@@ -282,12 +301,12 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
         ((org-agenda-overriding-header "\nProgramming Tasks")))
      ))
 
-    ("b" "Book-related tasks"
-     ( tags-todo "book"
-        ((org-agenda-overriding-header "\nBook Tasks")
-        (org-agenda-remove-tags t)
-        )
-     ))
+    ;; ("b" "Book-related tasks"
+    ;;  ( tags-todo "book"
+    ;;     ((org-agenda-overriding-header "\nBook Tasks")
+    ;;     (org-agenda-remove-tags t)
+    ;;     )
+    ;;  ))
 
     ;; ("r" "Reading Tasks"
     ;;  ((todo "READING"

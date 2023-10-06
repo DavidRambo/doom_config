@@ -42,12 +42,11 @@ Turn off global line highlight.
 ** Fonts
 Set font face and size depending upon the system: ~gnu/linux~ for Linux, ~darwin~ for MacOS.
 Be sure to include the decimal when declaring ~:size~.
-#+begin_src elisp
-;; (setq doom-font (font-spec :family "MesloLGSDZ Nerd Font" :size 14.0)
-;;       doom-variable-pitch-font (font-spec :family "Source Sans Pro" :size 16.0))
 
+I tend to use either "SauceCodePro NF" or "JetBrainsMono Nerd Font"
+#+begin_src elisp
 (cond ((eq system-type 'gnu/linux)
-        (setq doom-font (font-spec :family "SauceCodePro NF" :size 14.0)
+        (setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 13.0)
             doom-variable-pitch-font (font-spec :family "Source Sans Pro" :size 16.0 :weight 'regular)
             doom-serif-font (font-spec :family "Palatino Linotype" :size 16.0)
             doom-big-font (font-spec :size 28.0))
@@ -111,6 +110,13 @@ Split horizontally by default.
 (setq split-height-threshold nil)
 (setq split-width-threshold 0)
 #+end_src
+** Doom modeline
+#+begin_src elisp
+(custom-set-faces!
+  '(doom-modeline-buffer-modified :foreground "orange"))
+(setq doom-modeline-height 35)
+#+end_src
+
 * Navigation
 ** Evil search in folds
 https://github.com/doomemacs/doomemacs/issues/6478#issuecomment-1219582005
@@ -179,8 +185,11 @@ It also implements some apprearance effects as suggested by minad/org-mode.
 ** Mixed Pitch
 Getting variable fonts to load in org-mode with doom has always been a challenge.
 I have never been able to reliably access doom's own variable-pitch font within mixed-pitch-mode settings.
+Part of the problem is that mixed-pitch-mode loads before dom's UI module loads.
 I use tecosaur's configuration.
 *** tecosaur's mixed-pitch-modes
+tecosaur's doom emacs literatte configuration is fantastic.
+[[https://tecosaur.github.io/emacs-config/config.html#font-face][Its handling of font faces]] and mixed pitch actually works!
 #+begin_src elisp
 (defvar mixed-pitch-modes '(org-mode LaTeX-mode markdown-mode)
   "Modes that `mixed-pitch-mode' should be enabled in, but only after UI initialisation.")
@@ -233,7 +242,24 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
     (interactive)
     (let ((mixed-pitch-face 'variable-pitch-serif))
       (mixed-pitch-mode (or arg 'toggle))))
+
+(defadvice! +org-indent--reduced-text-prefixes ()
+  :after #'org-indent--compute-prefixes
+  (setq org-indent--text-line-prefixes
+        (make-vector org-indent--deepest-level nil))
+  (when (> org-indent-indentation-per-level 0)
+    (dotimes (n org-indent--deepest-level)
+      (aset org-indent--text-line-prefixes
+            n
+            (org-add-props
+                (concat (make-string (* n (1- org-indent-indentation-per-level))
+                                     ?\s)
+                        (if (> n 0)
+                             (char-to-string org-indent-boundary-char)
+                          "\u200b"))
+                nil 'face 'org-indent)))))
 )
+
 #+end_src
 
 *** simple mixed-pitch (not in use)
@@ -454,8 +480,8 @@ Org-modern replaces org-superstar for me.
 
     ("w" "Work-related tasks"
      (
-      (tags-todo "+postdoc-jobs"
-        ((org-agenda-overriding-header "\nPostdoc Tasks")))
+      ;; (tags-todo "+postdoc-jobs"
+      ;;   ((org-agenda-overriding-header "\nPostdoc Tasks")))
       ;; (tags-todo "book"
       ;;   ((org-agenda-overriding-header "\nBook Tasks")))
       ;; (tags-todo "jobs"
@@ -464,12 +490,12 @@ Org-modern replaces org-superstar for me.
         ((org-agenda-overriding-header "\nProgramming Tasks")))
      ))
 
-    ("b" "Book-related tasks"
-     ( tags-todo "book"
-        ((org-agenda-overriding-header "\nBook Tasks")
-        (org-agenda-remove-tags t)
-        )
-     ))
+    ;; ("b" "Book-related tasks"
+    ;;  ( tags-todo "book"
+    ;;     ((org-agenda-overriding-header "\nBook Tasks")
+    ;;     (org-agenda-remove-tags t)
+    ;;     )
+    ;;  ))
 
     ;; ("r" "Reading Tasks"
     ;;  ((todo "READING"
