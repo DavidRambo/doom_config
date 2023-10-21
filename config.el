@@ -204,7 +204,7 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
 (setq org-fontify-whole-block-delimiter-line nil)
 
 (custom-set-faces!
-  '(org-block :background "#363a4f"))
+  '(org-block :background "#1e2030"))
 
 (add-hook! 'org-mode #'org-appear-mode)
 
@@ -241,13 +241,14 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
      (800 1000 1200 1400 1600 1800 2000)
      " ┄┄┄┄┄ " "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄")
    org-agenda-current-time-string
-   "⭠ now ─────────────────────────────────────────────────")
+   "⭠ now ─────────────────────────────────────────────────"
 
-  (setq org-modern-todo-faces
+   org-modern-todo-faces
     '(("TODO" . (:foreground "#1c1f24" :background "#ee99a0" :weight regular))
       ("NEXT" . (:foreground "#1c1f24" :background "#eed49f" :slant italic))
       ("ACTIVE" . (:foreground "#1c1f24" :background "#a6da95" :slant italic))
-      ("DONE" . (:foreground "#1c1f24" :background "#91d7e3" :weight light :strike-through t))))
+      ("DONE" . (:foreground "#1c1f24" :background "#91d7e3" :weight light :strike-through t))
+        ("WAIT" . (:foreground "#1c1f24" :background "#b7bdf8" :weight light))))
   )
  ;;      ("READ" . (:foreground "#b16286" :weight regular))
  ;;      ("READING" . (:foreground "#8f3f71" :weight regular))
