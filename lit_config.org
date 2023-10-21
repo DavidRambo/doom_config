@@ -9,6 +9,36 @@
       user-mail-address "davidrambo@mailfence.com")
 #+end_src
 
+** Starting window size
+Sets the initial window frame's offset in pixels and its size in characters.
+#+begin_src elisp
+(setq initial-frame-alist '((top . 120) (left . 1200) (width . 100) (height . 50)))
+#+end_src
+
+A function to center the frame, written by user g-gundam on the [[https://emacs.stackexchange.com/a/74260][emacs stackexchange]]:
+#+begin_src elisp
+(defun frame-center ()
+  "Center the current frame."
+  (interactive)
+  (let* ((dw (display-pixel-width))
+         (dh (display-pixel-height))
+         (f  (selected-frame))
+         (fw (frame-pixel-width f))
+         (fh (frame-pixel-height f))
+         (x  (- (/ dw 2) (/ fw 2)))
+         (y  (- (/ dh 2) (/ fh 2))))
+    (message (format "dw %d dh %d fw %d fh %d x %d y %d" dw dh fw fh x y))
+    (set-frame-position f x y)))
+#+end_src
+
+It retrieves the width and height, in pixels, of both the display and the frame.
+It then calculates the horizontal offset ~x~ and vertical offset ~y~ as the difference between half of the corresponding width or height values.
+
+For example, my monitor is 3400 pixels wide, and my frame is set to start with a width of 100 characters, or 1016 pixels.
+This can be determined by running:
+#+begin_src elisp :tangle no
+(frame-pixel-width (selected-frame))
+#+end_src
 ** Disable window decoration
 #+begin_src elisp
 (setq default-frame-alist '((undecorated .t)))
@@ -355,7 +385,7 @@ So I adjust the background manually.
 
 #+begin_src elisp
 (custom-set-faces!
-  '(org-block :background "#363a4f"))
+  '(org-block :background "#1e2030"))
 #+end_src
 
 *** reveal emphasis markers when editing
@@ -438,13 +468,14 @@ Org-modern replaces org-superstar for me.
      (800 1000 1200 1400 1600 1800 2000)
      " ┄┄┄┄┄ " "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄")
    org-agenda-current-time-string
-   "⭠ now ─────────────────────────────────────────────────")
+   "⭠ now ─────────────────────────────────────────────────"
 
-  (setq org-modern-todo-faces
+   org-modern-todo-faces
     '(("TODO" . (:foreground "#1c1f24" :background "#ee99a0" :weight regular))
       ("NEXT" . (:foreground "#1c1f24" :background "#eed49f" :slant italic))
       ("ACTIVE" . (:foreground "#1c1f24" :background "#a6da95" :slant italic))
-      ("DONE" . (:foreground "#1c1f24" :background "#91d7e3" :weight light :strike-through t))))
+      ("DONE" . (:foreground "#1c1f24" :background "#91d7e3" :weight light :strike-through t))
+        ("WAIT" . (:foreground "#1c1f24" :background "#b7bdf8" :weight light))))
   )
  ;;      ("READ" . (:foreground "#b16286" :weight regular))
  ;;      ("READING" . (:foreground "#8f3f71" :weight regular))
