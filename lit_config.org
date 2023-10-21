@@ -111,9 +111,10 @@ Split horizontally by default.
 (setq split-width-threshold 0)
 #+end_src
 ** Doom modeline
+Set the color of the filename to catppuccin macchiato's "peach" and change the height of doom's modeline.
 #+begin_src elisp
 (custom-set-faces!
-  '(doom-modeline-buffer-modified :foreground "orange"))
+  '(doom-modeline-buffer-modified :foreground "#f5a97f"))
 (setq doom-modeline-height 35)
 #+end_src
 
@@ -418,10 +419,10 @@ Org-modern replaces org-superstar for me.
    "⭠ now ─────────────────────────────────────────────────")
 
   (setq org-modern-todo-faces
-    '(("TODO" . (:foreground "#1c1f24" :background "#e06c75" :weight regular))
-      ("NEXT" . (:foreground "#1c1f24" :background "#e5c07b" :slant italic))
-      ("ACTIVE" . (:foreground "#1c1f24" :background "#98c379" :slant italic))
-      ("DONE" . (:foreground "#1c1f24" :background "#56b6c2" :weight light :strike-through t))))
+    '(("TODO" . (:foreground "#1c1f24" :background "#ee99a0" :weight regular))
+      ("NEXT" . (:foreground "#1c1f24" :background "#eed49f" :slant italic))
+      ("ACTIVE" . (:foreground "#1c1f24" :background "#a6da95" :slant italic))
+      ("DONE" . (:foreground "#1c1f24" :background "#91d7e3" :weight light :strike-through t))))
   )
  ;;      ("READ" . (:foreground "#b16286" :weight regular))
  ;;      ("READING" . (:foreground "#8f3f71" :weight regular))

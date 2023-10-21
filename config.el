@@ -59,7 +59,7 @@
 (setq split-width-threshold 0)
 
 (custom-set-faces!
-  '(doom-modeline-buffer-modified :foreground "orange"))
+  '(doom-modeline-buffer-modified :foreground "#f5a97f"))
 (setq doom-modeline-height 35)
 
 (after! evil
@@ -234,10 +234,10 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
    "⭠ now ─────────────────────────────────────────────────")
 
   (setq org-modern-todo-faces
-    '(("TODO" . (:foreground "#1c1f24" :background "#e06c75" :weight regular))
-      ("NEXT" . (:foreground "#1c1f24" :background "#e5c07b" :slant italic))
-      ("ACTIVE" . (:foreground "#1c1f24" :background "#98c379" :slant italic))
-      ("DONE" . (:foreground "#1c1f24" :background "#56b6c2" :weight light :strike-through t))))
+    '(("TODO" . (:foreground "#1c1f24" :background "#ee99a0" :weight regular))
+      ("NEXT" . (:foreground "#1c1f24" :background "#eed49f" :slant italic))
+      ("ACTIVE" . (:foreground "#1c1f24" :background "#a6da95" :slant italic))
+      ("DONE" . (:foreground "#1c1f24" :background "#91d7e3" :weight light :strike-through t))))
   )
  ;;      ("READ" . (:foreground "#b16286" :weight regular))
  ;;      ("READING" . (:foreground "#8f3f71" :weight regular))
