@@ -395,3 +395,6 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
       (org-babel-tangle))))
 
 (add-hook! org-mode (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
+
+(use-package! powerthesaurus
+  :defer t)

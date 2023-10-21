@@ -674,3 +674,9 @@ One workaround is to override fold-open in org mode ([[https://github.com/doomem
 
 (add-hook! org-mode (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
 #+end_src
+* Packages
+** Thesaurus
+#+begin_src elisp
+(use-package! powerthesaurus
+  :defer t)
+#+end_src
