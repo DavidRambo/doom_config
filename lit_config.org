@@ -348,6 +348,16 @@ Doom emacs's ~custom-set-faces!~ macro makes this trivial.
 (custom-set-faces!
   '(fixed-pitch :inherit doom-font :size 14))
 #+end_src
+
+*** Adjust block background
+It can be difficult to see source code blocks in dark themes, especially in catppuccin.
+So I adjust the background manually.
+
+#+begin_src elisp
+(custom-set-faces!
+  '(org-block :background "#363a4f"))
+#+end_src
+
 *** reveal emphasis markers when editing
 #+begin_src elisp
 (add-hook! 'org-mode #'org-appear-mode)

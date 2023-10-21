@@ -203,6 +203,9 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
   '(org-quote :inherit doom-variable-pitch-font :slant normal))
 (setq org-fontify-whole-block-delimiter-line nil)
 
+(custom-set-faces!
+  '(org-block :background "#363a4f"))
+
 (add-hook! 'org-mode #'org-appear-mode)
 
 (setq org-ascii-bullets '((ascii ?* ?+ ?-) (latin1 ?* ?+ ?-) (utf-8 ?* ?+ ?-)))
