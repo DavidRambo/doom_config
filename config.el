@@ -76,13 +76,18 @@
 
 (setq org-directory "~/notes/")
 
-(add-hook! org-mode
-           #'org-modern-mode)
-(add-hook! 'org-agenda-finalize-hook #'org-modern-agenda)
+(use-package! org-modern
+  :hook (org-mode . org-modern-mode)
+  :config
+  (setq org-modern-star '("◉" "○" "◌" "⁖" "◿"))
+  )
+;; (add-hook! org-mode
+;;            #'org-modern-mode)
+;; (add-hook! 'org-agenda-finalize-hook #'org-modern-agenda)
 
-(defcustom org-modern-star '("◉" "○" "◌" "⁖" "◿")
-        "Overwrite org-modern's provided heading stars."
-        :type '(repeat string))
+;; (defcustom org-modern-star '("◉" "○" "◌" "⁖" "◿")
+;;         "Overwrite org-modern's provided heading stars."
+;;         :type '(repeat string))
 
 ;; Add frame borders and window dividers
 ;; (after! org
@@ -116,10 +121,10 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
       (setq mixed-pitch-set-height t)
       (setq variable-pitch (font-spec :family "SauceCodePro Nerd Font"))
       (cond ((eq system-type 'gnu/linux)
-            (set-face-attribute 'variable-pitch nil :height 170)
+            (set-face-attribute 'variable-pitch nil :height 160)
              )
             ((eq system-type 'darwin)
-            (set-face-attribute 'variable-pitch nil :height 180)
+            (set-face-attribute 'variable-pitch nil :height 170)
              )
         )
 
@@ -136,10 +141,10 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
 
   (setq mixed-pitch-set-height t)
   (cond ((eq system-type 'gnu/linux)
-        (setq variable-pitch-serif-font (font-spec :family "Palatino Linotype" :size 18.0))
+        (setq variable-pitch-serif-font (font-spec :family "Palatino Linotype" :size 16.0))
        )
       ((eq system-type 'darwin)
-        (setq variable-pitch-serif-font (font-spec :family "Palatino" :size 18.0)))
+        (setq variable-pitch-serif-font (font-spec :family "Palatino" :size 16.0)))
   )
   (set-face-attribute 'variable-pitch-serif nil :font variable-pitch-serif-font)
 
@@ -199,6 +204,8 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
 (setq org-fontify-whole-block-delimiter-line nil)
 
 (add-hook! 'org-mode #'org-appear-mode)
+
+(setq org-ascii-bullets '((ascii ?* ?+ ?-) (latin1 ?* ?+ ?-) (utf-8 ?* ?+ ?-)))
 
 (use-package! org-journal
   :init
