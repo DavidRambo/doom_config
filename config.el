@@ -239,29 +239,27 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
                          "~/repos/nuzzle-notes/todo.org"))
 
 (after! org
-
   (setq org-todo-keywords
         '((sequence "TODO(t)" "NEXT(n)" "ACTIVE(a)" "|" "DONE(d)")
           (sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "REVIEW(v)" "WAIT(w@/!)" "|" "COMPLETED(c)" "CANCELLED(k@)")))
 
    ;; Agenda styling
    (setq
-   org-agenda-tags-column 0
-   org-agenda-block-separator ?─
-   org-agenda-time-grid
-   '((daily today require-timed)
-     (800 1000 1200 1400 1600 1800 2000)
-     " ┄┄┄┄┄ " "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄")
-   org-agenda-current-time-string
-   "⭠ now ─────────────────────────────────────────────────"
+    org-agenda-tags-column 0
+    org-agenda-block-separator ?─
+    org-agenda-time-grid
+    '((daily today require-timed)
+      (800 1000 1200 1400 1600 1800 2000)
+      " ┄┄┄┄┄ " "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄")
+    org-agenda-current-time-string
+    "⭠ now ─────────────────────────────────────────────────"
 
-   org-modern-todo-faces
+    org-modern-todo-faces
     '(("TODO" . (:foreground "#1c1f24" :background "#ee99a0" :weight regular))
       ("NEXT" . (:foreground "#1c1f24" :background "#eed49f" :slant italic))
       ("ACTIVE" . (:foreground "#1c1f24" :background "#a6da95" :slant italic))
       ("DONE" . (:foreground "#1c1f24" :background "#91d7e3" :weight light :strike-through t))
-        ("WAIT" . (:foreground "#1c1f24" :background "#b7bdf8" :weight light))))
-  )
+        ("WAIT" . (:foreground "#1c1f24" :background "#b7bdf8" :weight light)))))
  ;;      ("READ" . (:foreground "#b16286" :weight regular))
  ;;      ("READING" . (:foreground "#8f3f71" :weight regular))
  ;;      ("WAITING" . (:foreground "black" :weight light))))
@@ -275,22 +273,20 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
         ))
 
 (setq org-agenda-custom-commands
-  '(
-    ("n" "Active and Next Tasks"
-     (
-        (todo "ACTIVE"
-                ((org-agenda-overriding-header "\nActive Tasks\n-----------------")
-                (org-agenda-prefix-format "   %i %?-2 t%s")
-                (org-agenda-remove-tags t)))
-        (todo "NEXT"
-                ((org-agenda-overriding-header "\nNext Tasks\n----------")
-                (org-agenda-prefix-format "   %i %?-2 t%s")
-                (org-agenda-remove-tags t)))
-        (agenda "" (
-                (org-deadline-warning-days 8)
-                (org-agenda-remove-tags t)
-                (org-agenda-current-time-string "ᐊ┈┈┈┈┈┈┈ Now")
-                (org-agenda-overriding-header "\nSchedule\n--------")))))
+  '(("n" "Active and Next Tasks"
+     ((todo "ACTIVE"
+            ((org-agenda-overriding-header "\nActive Tasks\n-----------------")
+             (org-agenda-prefix-format "   %i %?-2 t%s")
+             (org-agenda-remove-tags nil)))
+      (todo "NEXT"
+            ((org-agenda-overriding-header "\nNext Tasks\n-----------------")
+             (org-agenda-prefix-format "   %i %?-2 t%s")
+             (org-agenda-remove-tags nil)))
+      (agenda ""
+            ((org-deadline-warning-days 8)
+             (org-agenda-remove-tags t)
+             (org-agenda-current-time-string "ᐊ┈┈┈┈┈┈┈ Now")
+             (org-agenda-overriding-header "\nSchedule\n-----------------")))))
 
     ("h" "Home-related tasks"
        (tags-todo "home"
@@ -373,6 +369,26 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
        "j" #'org-roam-dailies-capture-today
        )
       )
+
+(use-package! org-super-agenda
+  :after org-agenda
+  :config
+  (setq
+        org-log-done nil
+        org-agenda-start-day nil
+        org-agenda-span 7
+        org-agenda-skip-scheduled-if-done t
+        org-agenda-skip-deadline-if-done t
+        org-agenda-include-deadlines t
+        org-agenda-block-separator 9472
+        org-agenda-tags-column 100
+        org-agenda-compact-blocks nil
+        org-agenda-dim-blocked-tasks t
+        org-agenda-start-on-weekday nil
+        org-super-agenda-groups nil
+        )
+  (org-super-agenda-mode)
+)
 
 (after! git-gutter
   (setq git-gutter:disabled-modes '(org-mode image-mode)))
