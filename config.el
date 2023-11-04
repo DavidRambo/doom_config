@@ -86,9 +86,6 @@
   ;; home row priorities: 8 6 4 5 - - 1 2 3 7
   (setq avy-keys '(?t ?e ?i ?s ?r ?o ?a ?n)))
 
-(map! :leader
-      "e" #'treemacs)
-
 (setq org-directory "~/notes/")
 
 (use-package! org-modern
