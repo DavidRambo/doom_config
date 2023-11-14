@@ -454,6 +454,7 @@ Org-modern replaces org-superstar for me.
 
    ;; Agenda styling
    (setq
+    org-agenda-todo-keyword-format ""
     org-agenda-tags-column 0
     org-agenda-block-separator ?─
     org-agenda-time-grid

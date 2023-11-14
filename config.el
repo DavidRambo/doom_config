@@ -245,6 +245,7 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
 
    ;; Agenda styling
    (setq
+    org-agenda-todo-keyword-format ""
     org-agenda-tags-column 0
     org-agenda-block-separator ?─
     org-agenda-time-grid
