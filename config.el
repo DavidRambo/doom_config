@@ -16,7 +16,7 @@
     (message (format "dw %d dh %d fw %d fh %d x %d y %d" dw dh fw fh x y))
     (set-frame-position f x y)))
 
-(setq default-frame-alist '((undecorated .t)))
+(add-to-list 'default-frame-alist '(undecorated .t))
 
 (setq display-line-numbers-type 'relative)
 
@@ -435,6 +435,8 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
       (org-babel-tangle))))
 
 (add-hook! org-mode (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
+
+(setq geiser-guile-binary "/usr/bin/guile3.0")
 
 (use-package! powerthesaurus
   :defer t)

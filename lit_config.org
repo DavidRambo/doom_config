@@ -41,7 +41,7 @@ This can be determined by running:
 #+end_src
 ** Disable window decoration
 #+begin_src elisp
-(setq default-frame-alist '((undecorated .t)))
+(add-to-list 'default-frame-alist '(undecorated .t))
 #+end_src
 
 ** Line Numbers
@@ -392,7 +392,6 @@ So I adjust the background manually.
 #+begin_src elisp
 (setq org-ascii-bullets '((ascii ?* ?+ ?-) (latin1 ?* ?+ ?-) (utf-8 ?* ?+ ?-)))
 #+end_src
-
 ** Superstar (not in use)
 Org-modern replaces org-superstar for me.
 #+begin_src elisp :tangle no
@@ -719,6 +718,11 @@ One workaround is to override fold-open in org mode ([[https://github.com/doomem
 (add-hook! org-mode (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
 #+end_src
 * Packages
+** Geiser
+On Fedora, Guile Scheme is installed as ~guile3.0~, so geiser does not find it by default.
+#+begin_src elisp
+(setq geiser-guile-binary "/usr/bin/guile3.0")
+#+end_src
 ** Thesaurus
 #+begin_src elisp
 (use-package! powerthesaurus
