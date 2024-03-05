@@ -34,8 +34,9 @@
 (remove-hook 'doom-first-buffer-hook #'global-hl-line-mode)
 
 (cond ((eq system-type 'gnu/linux)
-        (setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 13.0)
-            doom-variable-pitch-font (font-spec :family "Source Sans Pro" :size 16.0 :weight 'regular)
+        ;; (setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 13.0)
+        (setq doom-font (font-spec :family "Iosevka" :size 14.0)
+            doom-variable-pitch-font (font-spec :family "Iosevka Aile" :size 16.0 :weight 'regular)
             doom-serif-font (font-spec :family "Palatino Linotype" :size 16.0)
             doom-big-font (font-spec :size 28.0))
        )
@@ -131,7 +132,7 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
 (after! mixed-pitch
 
       (setq mixed-pitch-set-height t)
-      (setq variable-pitch (font-spec :family "SauceCodePro Nerd Font"))
+      (setq variable-pitch (font-spec :family "Iosevka Aile"))
       (cond ((eq system-type 'gnu/linux)
             (set-face-attribute 'variable-pitch nil :height 160)
              )
@@ -221,6 +222,32 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
 (add-hook! 'org-mode #'org-appear-mode)
 
 (setq org-ascii-bullets '((ascii ?* ?+ ?-) (latin1 ?* ?+ ?-) (utf-8 ?* ?+ ?-)))
+
+(use-package! ox-moderncv
+    :init
+    (require 'ox-moderncv))
+
+(after! org
+  (use-package! ox-latex
+    :init
+    ;; this code runs immediately
+    :config
+    ;; this code runs after the package loads
+    (setq org-latex-pdf-process
+          '("pdflatex -interaction nonstopmode -output-directory %o %f"
+            "bibtex %b"
+            "pdflatex -interaction nonstopmode -output-directory %o %f"
+            "pdflatex -interaction nonstopmode -output-directory %o %f"))
+    (setq org-latex-with-hyperref nil) ;; stops org from adding hypersetup{}
+
+    ;; delete unwanted files
+    (setq org-latex-logfiles-extensions
+          (quote ("lof" "lot" "tex~" "aux" "idx" "log" "out" "toc" "nav" "snm" "vrb" "dvi" "fdb_latexmk" "blg" "brf" "fls" "entoc" "ps" "spl" "bbl" "xmpi" "run.xml" "bcf" "acn" "acr" "alg" "glg" "gls" "ist")))
+    (unless (boundp 'org-latex-classes)
+        (setq org-latex-classes nil)))
+  (use-package! ox-extra
+    :config
+    (ox-extras-activate '(latex-header-blocks ignore-headlines))))
 
 (use-package! org-journal
   :init
@@ -396,9 +423,8 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
 
 (setq company-global-modes '(not org-mode))
 
-(setq fill-column 90)
-
 (defun center-visual-fill ()
+  (setq fill-column 84)
   (setq visual-fill-column-center-text t)
   (visual-fill-column-mode 1))
 

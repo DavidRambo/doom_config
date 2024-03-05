@@ -1,5 +1,5 @@
 #+title: Doom Emacs Configuration
-#+PROPERTY: header-args :tangle config.el
+#+PROPERTY: header-args :tangle config.el :results none
 #+startup: content
 
 * General Configuration
@@ -12,7 +12,7 @@
 ** Starting window size
 Sets the initial window frame's offset in pixels and its size in characters.
 #+begin_src elisp
-(setq initial-frame-alist '((top . 120) (left . 1262) (width . 90) (height . 50)))
+(setq initial-frame-alist '((top . 120) (left . 1262) (width . 92) (height . 50)))
 #+end_src
 
 A function to center the frame, written by user g-gundam on the [[https://emacs.stackexchange.com/a/74260][emacs stackexchange]]:
@@ -76,8 +76,9 @@ Be sure to include the decimal when declaring ~:size~.
 I tend to use either "SauceCodePro NF" or "JetBrainsMono Nerd Font"
 #+begin_src elisp
 (cond ((eq system-type 'gnu/linux)
-        (setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 13.0)
-            doom-variable-pitch-font (font-spec :family "Source Sans Pro" :size 16.0 :weight 'regular)
+        ;; (setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 13.0)
+        (setq doom-font (font-spec :family "Iosevka" :size 14.0)
+            doom-variable-pitch-font (font-spec :family "Iosevka Aile" :size 14.0 :weight 'regular)
             doom-serif-font (font-spec :family "Palatino Linotype" :size 16.0)
             doom-big-font (font-spec :size 28.0))
        )
@@ -238,9 +239,9 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
 (after! mixed-pitch
 
       (setq mixed-pitch-set-height t)
-      (setq variable-pitch (font-spec :family "SauceCodePro Nerd Font"))
+      (setq variable-pitch (font-spec :family "Iosevka Aile"))
       (cond ((eq system-type 'gnu/linux)
-            (set-face-attribute 'variable-pitch nil :height 160)
+            (set-face-attribute 'variable-pitch nil :height 140)
              )
             ((eq system-type 'darwin)
             (set-face-attribute 'variable-pitch nil :height 170)
@@ -289,7 +290,6 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
                           "\u200b"))
                 nil 'face 'org-indent)))))
 )
-
 #+end_src
 
 *** simple mixed-pitch (not in use)
@@ -370,7 +370,7 @@ Doom emacs's ~custom-set-faces!~ macro makes this trivial.
 
 #+begin_src elisp :tangle no
 (custom-set-faces!
-  '(fixed-pitch :inherit doom-font :size 14))
+  '(fixed-pitch :inherit doom-font :size 15))
 #+end_src
 
 *** Adjust block background
@@ -391,6 +391,37 @@ So I adjust the background manually.
 ~org-ascii-bullets~ determines the characters for headlines converted to lists in ASCII export.
 #+begin_src elisp
 (setq org-ascii-bullets '((ascii ?* ?+ ?-) (latin1 ?* ?+ ?-) (utf-8 ?* ?+ ?-)))
+#+end_src
+*** org-cv
+#+begin_src elisp
+(use-package! ox-moderncv
+    :init
+    (require 'ox-moderncv))
+#+end_src
+*** latex
+Source: https://www.aidanscannell.com/post/org-mode-resume/
+#+begin_src elisp
+(after! org
+  (use-package! ox-latex
+    :init
+    ;; this code runs immediately
+    :config
+    ;; this code runs after the package loads
+    (setq org-latex-pdf-process
+          '("pdflatex -interaction nonstopmode -output-directory %o %f"
+            "bibtex %b"
+            "pdflatex -interaction nonstopmode -output-directory %o %f"
+            "pdflatex -interaction nonstopmode -output-directory %o %f"))
+    (setq org-latex-with-hyperref nil) ;; stops org from adding hypersetup{}
+
+    ;; delete unwanted files
+    (setq org-latex-logfiles-extensions
+          (quote ("lof" "lot" "tex~" "aux" "idx" "log" "out" "toc" "nav" "snm" "vrb" "dvi" "fdb_latexmk" "blg" "brf" "fls" "entoc" "ps" "spl" "bbl" "xmpi" "run.xml" "bcf" "acn" "acr" "alg" "glg" "gls" "ist")))
+    (unless (boundp 'org-latex-classes)
+        (setq org-latex-classes nil)))
+  (use-package! ox-extra
+    :config
+    (ox-extras-activate '(latex-header-blocks ignore-headlines))))
 #+end_src
 ** Superstar (not in use)
 Org-modern replaces org-superstar for me.
@@ -660,9 +691,8 @@ Company's autocompletion is very annoying when writing, so I turn it off in org-
 
 ** Visual Column Mode
 #+begin_src elisp
-(setq fill-column 90)
-
 (defun center-visual-fill ()
+  (setq fill-column 84)
   (setq visual-fill-column-center-text t)
   (visual-fill-column-mode 1))
 
