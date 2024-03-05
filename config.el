@@ -1,7 +1,7 @@
 (setq user-full-name "David Rambo"
       user-mail-address "davidrambo@mailfence.com")
 
-(setq initial-frame-alist '((top . 120) (left . 1262) (width . 90) (height . 50)))
+(setq initial-frame-alist '((top . 120) (left . 1262) (width . 92) (height . 50)))
 
 (defun frame-center ()
   "Center the current frame."
@@ -36,7 +36,7 @@
 (cond ((eq system-type 'gnu/linux)
         ;; (setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 13.0)
         (setq doom-font (font-spec :family "Iosevka" :size 14.0)
-            doom-variable-pitch-font (font-spec :family "Iosevka Aile" :size 16.0 :weight 'regular)
+            doom-variable-pitch-font (font-spec :family "Iosevka Aile" :size 14.0 :weight 'regular)
             doom-serif-font (font-spec :family "Palatino Linotype" :size 16.0)
             doom-big-font (font-spec :size 28.0))
        )
@@ -134,7 +134,7 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
       (setq mixed-pitch-set-height t)
       (setq variable-pitch (font-spec :family "Iosevka Aile"))
       (cond ((eq system-type 'gnu/linux)
-            (set-face-attribute 'variable-pitch nil :height 160)
+            (set-face-attribute 'variable-pitch nil :height 140)
              )
             ((eq system-type 'darwin)
             (set-face-attribute 'variable-pitch nil :height 170)
@@ -262,8 +262,7 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
   (setq org-journal-enable-agenda-integration nil)
 )
 
-(setq org-agenda-files '("~/notes/tasks.org"
-                         "~/repos/nuzzle-notes/todo.org"))
+(setq org-agenda-files '("~/notes/tasks.org"))
 
 (after! org
   (setq org-todo-keywords
