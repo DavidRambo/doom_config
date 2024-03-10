@@ -353,7 +353,7 @@ Unnecessary alternative approach:
               (org-level-6 . 1.0)
               (org-level-7 . 1.0)
               (org-level-8 . 1.0)))
-   (set-face-attribute (car face) nil :weight 'regular :height (cdr face)))
+   (set-face-attribute (car face) nil :weight 'light :height (cdr face)))
 )
 #+end_src
 *** remove italics in quote and verse blocks

@@ -209,7 +209,7 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
               (org-level-6 . 1.0)
               (org-level-7 . 1.0)
               (org-level-8 . 1.0)))
-   (set-face-attribute (car face) nil :weight 'regular :height (cdr face)))
+   (set-face-attribute (car face) nil :weight 'light :height (cdr face)))
 )
 
 (custom-set-faces!
