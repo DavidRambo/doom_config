@@ -76,7 +76,7 @@
 
 (custom-set-faces!
   '(doom-modeline-buffer-modified :foreground "#f5a97f"))
-(setq doom-modeline-height 35)
+(setq doom-modeline-height 28)
 
 (after! evil
   (evil-select-search-module 'evil-search-module 'isearch))

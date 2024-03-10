@@ -142,11 +142,12 @@ Split horizontally by default.
 (setq split-width-threshold 0)
 #+end_src
 ** Doom modeline
-Set the color of the filename to catppuccin macchiato's "peach" and change the height of doom's modeline.
+- Set the color of the filename when modified to catppuccin macchiato's "peach."
+- Change the height of doom's modeline.
 #+begin_src elisp
 (custom-set-faces!
   '(doom-modeline-buffer-modified :foreground "#f5a97f"))
-(setq doom-modeline-height 35)
+(setq doom-modeline-height 28)
 #+end_src
 
 * Navigation
