@@ -98,7 +98,7 @@ I tend to use either "SauceCodePro NF" or "JetBrainsMono Nerd Font"
 #+end_src
 
 ** Line spacing
-#+begin_src elisp
+#+begin_src elisp :tangle no
 (setq-default line-spacing 0.1)
 #+end_src
 ** Navigate visual lines
