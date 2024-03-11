@@ -294,7 +294,6 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
         ("Coding" ,(nerd-icons-faicon "nf-fa-code") nil nil :ascent center)
         ("Home" ,(nerd-icons-octicon "nf-oct-home") nil nil :ascent center)
         ("Habits" ,(nerd-icons-faicon "nf-fa-calendar_check_o") nil nil :ascent center)
-        ("Nuzzle" ,(nerd-icons-mdicon "nf-md-cat") nil nil :ascent center)
         ))
 
 (setq org-agenda-custom-commands
@@ -322,10 +321,8 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
 
     ("w" "Work-related tasks"
      (
-      ;; (tags-todo "jobs"
-      ;;   ((org-agenda-overriding-header "\nJob Application Tasks")))
-      (tags-todo "+nuzzle"
-        ((org-agenda-overriding-header "\nNuzzle Tasks")))
+      (tags-todo "jobs"
+        ((org-agenda-overriding-header "\nJob Application Tasks")))
       (tags-todo "+coding"
         ((org-agenda-overriding-header "\nProgramming Tasks")))
      ))

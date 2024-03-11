@@ -523,7 +523,6 @@ This used to use ~all-the-icons-~ functions.
         ("Coding" ,(nerd-icons-faicon "nf-fa-code") nil nil :ascent center)
         ("Home" ,(nerd-icons-octicon "nf-oct-home") nil nil :ascent center)
         ("Habits" ,(nerd-icons-faicon "nf-fa-calendar_check_o") nil nil :ascent center)
-        ("Nuzzle" ,(nerd-icons-mdicon "nf-md-cat") nil nil :ascent center)
         ))
 #+end_src
 
@@ -554,10 +553,8 @@ This used to use ~all-the-icons-~ functions.
 
     ("w" "Work-related tasks"
      (
-      ;; (tags-todo "jobs"
-      ;;   ((org-agenda-overriding-header "\nJob Application Tasks")))
-      (tags-todo "+nuzzle"
-        ((org-agenda-overriding-header "\nNuzzle Tasks")))
+      (tags-todo "jobs"
+        ((org-agenda-overriding-header "\nJob Application Tasks")))
       (tags-todo "+coding"
         ((org-agenda-overriding-header "\nProgramming Tasks")))
      ))
