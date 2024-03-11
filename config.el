@@ -90,7 +90,7 @@
 (use-package! org-modern
   :hook (org-mode . org-modern-mode)
   :config
-  (setq org-modern-star '("◉" "○" "◌" "⁖" "◿"))
+  (setq org-modern-star '("◉" "●" "○" "⁖" "◿" "◌"))
   )
 ;; (add-hook! org-mode
 ;;            #'org-modern-mode)
