@@ -16,7 +16,7 @@
     (message (format "dw %d dh %d fw %d fh %d x %d y %d" dw dh fw fh x y))
     (set-frame-position f x y)))
 
-(add-to-list 'default-frame-alist '(undecorated .t))
+(add-to-list 'default-frame-alist '(undecorated . t))
 
 (setq display-line-numbers-type 'relative)
 

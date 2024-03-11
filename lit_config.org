@@ -41,7 +41,7 @@ This can be determined by running:
 #+end_src
 ** Disable window decoration
 #+begin_src elisp
-(add-to-list 'default-frame-alist '(undecorated .t))
+(add-to-list 'default-frame-alist '(undecorated . t))
 #+end_src
 
 ** Line Numbers
