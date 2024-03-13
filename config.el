@@ -16,7 +16,10 @@
     (message (format "dw %d dh %d fw %d fh %d x %d y %d" dw dh fw fh x y))
     (set-frame-position f x y)))
 
-(add-to-list 'default-frame-alist '(undecorated . t))
+(cond ((eq system-type 'gnu/linux)
+       (add-to-list 'default-frame-alist '(undecorated . t)))
+      ((eq system-type 'darwin)
+       (add-to-list 'default-frame-alist '(undecorated-round . t))))
 
 (setq display-line-numbers-type 'relative)
 
