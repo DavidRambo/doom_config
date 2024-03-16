@@ -715,12 +715,13 @@ Function to open tasks.org plus mapping.
 #+end_src
 
 *** Open hours log
-Function to open hours-log.org plus mapping to open.
+Function to open my timedot hours log and turn on org-mode, plus a mapping to call it.
 #+begin_src elisp
 (defun open-hours-log ()
   "Open hours-log.org file."
   (interactive)
-  (find-file-existing "~/notes/hours-log.org"))
+  (find-file-existing "~/notes/time_ledger.timedot")
+  (org-mode))
 (global-set-key (kbd "C-c h") 'open-hours-log)
  #+end_src
 *** Toggle subtree narrow

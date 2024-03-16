@@ -440,7 +440,8 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
 (defun open-hours-log ()
   "Open hours-log.org file."
   (interactive)
-  (find-file-existing "~/notes/hours-log.org"))
+  (find-file-existing "~/notes/time_ledger.timedot")
+  (org-mode))
 (global-set-key (kbd "C-c h") 'open-hours-log)
 
 (map! :leader
