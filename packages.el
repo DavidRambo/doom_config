@@ -62,3 +62,4 @@
 (package! org-cv
   :recipe (:host gitlab :repo "Titan-C/org-cv" :files ("*.el")))
 (package! catppuccin-theme)
+(package! transient)
