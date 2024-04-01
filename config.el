@@ -38,7 +38,7 @@
 
 (cond ((eq system-type 'gnu/linux)
         ;; (setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 13.0)
-        (setq doom-font (font-spec :family "Iosevka Nerd Font" :size 14.0)
+        (setq doom-font (font-spec :family "IosevkaTerm Nerd Font" :size 14.0)
             doom-variable-pitch-font (font-spec :family "Iosevka Aile" :size 14.0 :weight 'regular)
             doom-serif-font (font-spec :family "Palatino Linotype" :size 16.0)
             doom-big-font (font-spec :size 28.0))
@@ -49,6 +49,10 @@
             doom-serif-font (font-spec :family "PT Serif" :size 16.0)
             doom-big-font (font-spec :size 28.0))
        ))
+
+(set-face-attribute 'italic nil
+                    :slant 'italic
+                    :underline nil)
 
 (setq doom-theme 'catppuccin
       catppuccin-flavor 'macchiato
