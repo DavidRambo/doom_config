@@ -326,6 +326,11 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
         ))
      )
 
+    ("o" "OSU"
+     ((tags-todo "+OSU"
+                ((org-agenda-overriding-header "OSU")
+                 (org-agenda-remove-tags nil)))))
+
     ("w" "Work-related tasks"
      (
       (tags-todo "jobs"
@@ -405,12 +410,12 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
   (setq
         org-log-done nil
         org-agenda-start-day nil
-        org-agenda-span 7
+        org-agenda-span 10
         org-agenda-skip-scheduled-if-done t
         org-agenda-skip-deadline-if-done t
         org-agenda-include-deadlines t
         org-agenda-block-separator 9472
-        org-agenda-tags-column 100
+        org-agenda-tags-column 60
         org-agenda-compact-blocks nil
         org-agenda-dim-blocked-tasks t
         org-agenda-start-on-weekday nil
