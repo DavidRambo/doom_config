@@ -56,10 +56,16 @@
 (package! mixed-pitch)
 (package! visual-fill-column)
 (package! counsel)
-(package! transient :pin "c2bdf7e12c530eb85476d3aef317eb2941ab9440")
-(package! with-editor :pin "391e76a256aeec6b9e4cbd733088f30c677d965b")
+
+;; https://github.com/doomemacs/doomemacs/issues/6425#issuecomment-1433245212
+(package! transient
+      :pin "c2bdf7e12c530eb85476d3aef317eb2941ab9440"
+      :recipe (:host github :repo "magit/transient"))
+(package! with-editor
+          :pin "bbc60f68ac190f02da8a100b6fb67cf1c27c53ab"
+          :recipe (:host github :repo "magit/with-editor"))
+
 (package! powerthesaurus)
 (package! org-cv
   :recipe (:host gitlab :repo "Titan-C/org-cv" :files ("*.el")))
 (package! catppuccin-theme)
-(package! transient)
