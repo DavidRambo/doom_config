@@ -56,8 +56,6 @@
 (package! mixed-pitch)
 (package! visual-fill-column)
 (package! counsel)
-(package! transient :pin "c2bdf7e12c530eb85476d3aef317eb2941ab9440")
-(package! with-editor :pin "391e76a256aeec6b9e4cbd733088f30c677d965b")
 (package! powerthesaurus)
 (package! org-cv
   :recipe (:host gitlab :repo "Titan-C/org-cv" :files ("*.el")))
