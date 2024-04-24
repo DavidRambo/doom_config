@@ -1,7 +1,7 @@
 (setq user-full-name "David Rambo"
       user-mail-address "davidrambo@mailfence.com")
 
-(setq initial-frame-alist '((top . 120) (left . 1262) (width . 92) (height . 50)))
+(setq initial-frame-alist '((top . 60) (left . 1262) (width . 92) (height . 50)))
 
 (defun frame-center ()
   "Center the current frame."

@@ -12,7 +12,7 @@
 ** Starting window size
 Sets the initial window frame's offset in pixels and its size in characters.
 #+begin_src elisp
-(setq initial-frame-alist '((top . 120) (left . 1262) (width . 92) (height . 50)))
+(setq initial-frame-alist '((top . 60) (left . 1262) (width . 92) (height . 50)))
 #+end_src
 
 A function to center the frame, written by user g-gundam on the [[https://emacs.stackexchange.com/a/74260][emacs stackexchange]]:
