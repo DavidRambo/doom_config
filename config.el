@@ -46,8 +46,8 @@
             doom-big-font (font-spec :size 28.0))
        )
       ((eq system-type 'darwin)
-        (setq doom-font (font-spec :family "Iosevka Nerd Font" :size 14.0 :weight 'light)
-            doom-variable-pitch-font (font-spec :family "Iosevka Aile" :size 16.0 :weight 'light)
+        (setq doom-font (font-spec :family "Iosevka Nerd Font" :size 14.0 :weight 'regular)
+            doom-variable-pitch-font (font-spec :family "Iosevka Aile" :size 16.0 :weight 'regular)
             doom-serif-font (font-spec :family "PT Serif" :size 16.0)
             doom-big-font (font-spec :size 28.0))
        ))
@@ -101,26 +101,6 @@
   :config
   (setq org-modern-star '("◉" "●" "○" "⁖" "◿" "◌"))
   )
-;; (add-hook! org-mode
-;;            #'org-modern-mode)
-;; (add-hook! 'org-agenda-finalize-hook #'org-modern-agenda)
-
-;; (defcustom org-modern-star '("◉" "○" "◌" "⁖" "◿")
-;;         "Overwrite org-modern's provided heading stars."
-;;         :type '(repeat string))
-
-;; Add frame borders and window dividers
-;; (after! org
-;;     (modify-all-frames-parameters
-;;     '((right-divider-width . 10)
-;;     (internal-border-width . 10)))
-;;     (dolist (face '(window-divider
-;;                     window-divider-first-pixel
-;;                     window-divider-last-pixel))
-;;     (face-spec-reset-face face)
-;;     (set-face-foreground face (face-attribute 'default :background)))
-;;     (set-face-background 'fringe (face-attribute 'default :background))
-;; )
 
 (defvar mixed-pitch-modes '(org-mode LaTeX-mode markdown-mode)
   "Modes that `mixed-pitch-mode' should be enabled in, but only after UI initialisation.")
@@ -206,25 +186,25 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
    org-startup-folded 'content
    )
 
+  (set-face-attribute 'org-document-title nil :weight 'light :height 1.1)
+
    ;; Heading Styles
    (dolist (face
-            '((org-level-1 . 1.2)
-              (org-level-2 . 1.1)
+            '((org-level-1 . 1.1)
+              (org-level-2 . 1.05)
               (org-level-3 . 1.0)
               (org-level-4 . 1.0)
               (org-level-5 . 1.0)
               (org-level-6 . 1.0)
               (org-level-7 . 1.0)
               (org-level-8 . 1.0)))
-   (set-face-attribute (car face) nil :weight 'light :height (cdr face)))
+   (set-face-attribute (car face) nil :weight 'thin :height (cdr face)))
 )
 
 (custom-set-faces!
   '(org-quote :inherit doom-variable-pitch-font :slant normal))
 (setq org-fontify-whole-block-delimiter-line nil)
 
-(custom-set-faces!
-  '(org-block :background "#1e2030"))
 
 (add-hook! 'org-mode #'org-appear-mode)
 
@@ -432,7 +412,7 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
 (setq company-global-modes '(not org-mode))
 
 (defun center-visual-fill ()
-  (setq fill-column 84)
+  (setq fill-column 80)
   (setq visual-fill-column-center-text t)
   (visual-fill-column-mode 1))
 

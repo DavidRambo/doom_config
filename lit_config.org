@@ -95,8 +95,8 @@ I tend to use either "SauceCodePro NF" or "JetBrainsMono Nerd Font"
             doom-big-font (font-spec :size 28.0))
        )
       ((eq system-type 'darwin)
-        (setq doom-font (font-spec :family "Iosevka Nerd Font" :size 14.0 :weight 'light)
-            doom-variable-pitch-font (font-spec :family "Iosevka Aile" :size 16.0 :weight 'light)
+        (setq doom-font (font-spec :family "Iosevka Nerd Font" :size 14.0 :weight 'regular)
+            doom-variable-pitch-font (font-spec :family "Iosevka Aile" :size 16.0 :weight 'regular)
             doom-serif-font (font-spec :family "PT Serif" :size 16.0)
             doom-big-font (font-spec :size 28.0))
        ))
@@ -359,17 +359,19 @@ Unnecessary alternative approach:
    org-startup-folded 'content
    )
 
+  (set-face-attribute 'org-document-title nil :weight 'light :height 1.1)
+
    ;; Heading Styles
    (dolist (face
-            '((org-level-1 . 1.2)
-              (org-level-2 . 1.1)
+            '((org-level-1 . 1.1)
+              (org-level-2 . 1.05)
               (org-level-3 . 1.0)
               (org-level-4 . 1.0)
               (org-level-5 . 1.0)
               (org-level-6 . 1.0)
               (org-level-7 . 1.0)
               (org-level-8 . 1.0)))
-   (set-face-attribute (car face) nil :weight 'light :height (cdr face)))
+   (set-face-attribute (car face) nil :weight 'thin :height (cdr face)))
 )
 #+end_src
 *** remove italics in quote and verse blocks
@@ -709,7 +711,7 @@ Company's autocompletion is very annoying when writing, so I turn it off in org-
 ** Visual Column Mode
 #+begin_src elisp
 (defun center-visual-fill ()
-  (setq fill-column 84)
+  (setq fill-column 80)
   (setq visual-fill-column-center-text t)
   (visual-fill-column-mode 1))
 
