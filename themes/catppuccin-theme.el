@@ -51,7 +51,7 @@ The theme has to be reloaded after changing anything in this group."
   :type 'number
   :group 'catppuccin)
 
-(defcustom catppuccin-flavor 'mocha
+(defcustom catppuccin-flavor 'latte
   "The flavor to use for the Catppuccin theme.
 Must be one of `mocha`, `macchiato`, `frappe`, or `latte`."
   :type '(choice (const :tag "Mocha" mocha)
@@ -196,15 +196,15 @@ Must be one of `mocha`, `macchiato`, `frappe`, or `latte`."
         (str "#"))
     (while (<= i 5)
       (setq str
-      (concat
-       str
-       (format
-        "%02x"
-        (* (round
-      (/
-       (string-to-number (substring color i (+ i 2)) 16)
-       17))
-     17))))
+       (concat
+        str
+        (format
+         "%02x"
+         (* (round
+             (/
+              (string-to-number (substring color i (+ i 2)) 16)
+              17))
+          17))))
       (setq i (+ i 2)))
     str))
 
@@ -221,7 +221,7 @@ Must be one of `mocha`, `macchiato`, `frappe`, or `latte`."
     "Lighten COLOR by VALUE%."
     (let* ((factor (/ value 100.0)))
       (apply rgb-to-hex (mapcar (lambda (v) (funcall rnd (min 255 (+ (* (- 255 v) factor) v))))
-              (funcall hex-to-rgb color)))))
+                         (funcall hex-to-rgb color)))))
 
   (defun catppuccin-darken (color value)
     "Darken COLOR by VALUE%."
@@ -907,11 +907,11 @@ Must be one of `mocha`, `macchiato`, `frappe`, or `latte`."
                ;; term
                (term :foreground ,ctp-text :background ,ctp-base)
                (term-color-black ,@(if (eq catppuccin-flavor 'latte)
-                                  (list :foreground ctp-subtext1  :background ctp-subtext1)
-                                (list :foreground ctp-surface1 :background ctp-surface1)))
+                                    (list :foreground ctp-subtext1  :background ctp-subtext1)
+                                    (list :foreground ctp-surface1 :background ctp-surface1)))
                (term-color-black-white ,@(if (eq catppuccin-flavor 'latte)
-                                  (list :foreground ctp-subtext0 :background ctp-subtext0)
-                                (list :foreground ctp-surface2 :background ctp-surface2)))
+                                          (list :foreground ctp-subtext0 :background ctp-subtext0)
+                                          (list :foreground ctp-surface2 :background ctp-surface2)))
                (term-color-red :foreground ,ctp-red :background ,ctp-red)
                (term-color-bright-red :foreground ,ctp-red :background ,ctp-red)
                (term-color-green :foreground ,ctp-green :background ,ctp-green)
@@ -925,11 +925,11 @@ Must be one of `mocha`, `macchiato`, `frappe`, or `latte`."
                (term-color-cyan :foreground ,ctp-teal :background ,ctp-teal)
                (term-color-bright-cyan :foreground ,ctp-teal :background ,ctp-teal)
                (term-color-white ,@(if (eq catppuccin-flavor 'latte)
-                                  (list :foreground ctp-surface2  :background ctp-surface2)
-                                (list :foreground ctp-subtext1 :background ctp-subtext1)))
+                                    (list :foreground ctp-surface2  :background ctp-surface2)
+                                    (list :foreground ctp-subtext1 :background ctp-subtext1)))
                (term-color-bright-white ,@(if (eq catppuccin-flavor 'latte)
-                                  (list :foreground ctp-surface1 :background ctp-surface1)
-                                (list :foreground ctp-subtext0 :background ctp-subtext0)))
+                                           (list :foreground ctp-surface1 :background ctp-surface1)
+                                           (list :foreground ctp-subtext0 :background ctp-subtext0)))
                ;; tree-sitter
                (tree-sitter-hl-face:attribute :inherit font-lock-constant-face)
                (tree-sitter-hl-face:comment :inherit font-lock-comment-face)

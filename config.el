@@ -57,7 +57,7 @@
                     :underline nil)
 
 (setq doom-theme 'catppuccin
-      catppuccin-flavor 'macchiato
+      catppuccin-flavor 'latte
       catppuccin-enlarge-headings 'nil)
 
 (define-key evil-normal-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
@@ -81,8 +81,26 @@
 (setq split-height-threshold nil)
 (setq split-width-threshold 0)
 
+(map! :after evil-org :map evil-org-mode-map
+      :leader
+      (:nv
+       "w u" #'evil-window-up
+       ;:desc "Find or Create Node"
+       "w e" #'evil-window-down
+       ;:desc "Insert Node"
+       "w i" #'evil-window-right
+       ;:desc "Create id for heading node"
+       "w n" #'evil-window-left
+       ;:desc "evil-window-split"
+       "w s" #'evil-window-split
+       ;:desc "evil-window-split"
+       "w v" #'evil-window-vsplit
+       ;:desc "evil-window-delete"
+       "w c" #'evil-window-delete
+       ))
+
 (custom-set-faces!
-  '(doom-modeline-buffer-modified :foreground "#f5a97f"))
+  '(doom-modeline-buffer-modified :foreground "#e64553"))
 (setq doom-modeline-height 28)
 
 (after! evil
@@ -205,6 +223,10 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
   '(org-quote :inherit doom-variable-pitch-font :slant normal))
 (setq org-fontify-whole-block-delimiter-line nil)
 
+(after! org
+  (custom-set-faces!
+  ; Macchiatto --> '(org-block :background "#1e2030")) ; for Macchiato
+    '(org-block :background "#e6e9ef"))) ; for Latte
 
 (add-hook! 'org-mode #'org-appear-mode)
 

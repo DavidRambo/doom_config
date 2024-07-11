@@ -108,7 +108,7 @@ I tend to use either "SauceCodePro NF" or "JetBrainsMono Nerd Font"
 ** Theme
 #+begin_src elisp
 (setq doom-theme 'catppuccin
-      catppuccin-flavor 'macchiato
+      catppuccin-flavor 'latte
       catppuccin-enlarge-headings 'nil)
 #+end_src
 
@@ -156,12 +156,34 @@ Split horizontally by default.
 (setq split-height-threshold nil)
 (setq split-width-threshold 0)
 #+end_src
+*** Keymaps for windows
+Add vim-style keybinds for window splitting and switching.
+I use Colemak, so the letters mirror an arrow cluster where my right hand rests ("ijkl" on qwerty).
+#+begin_src elisp
+(map! :after evil-org :map evil-org-mode-map
+      :leader
+      (:nv
+       "w u" #'evil-window-up
+       ;:desc "Find or Create Node"
+       "w e" #'evil-window-down
+       ;:desc "Insert Node"
+       "w i" #'evil-window-right
+       ;:desc "Create id for heading node"
+       "w n" #'evil-window-left
+       ;:desc "evil-window-split"
+       "w s" #'evil-window-split
+       ;:desc "evil-window-split"
+       "w v" #'evil-window-vsplit
+       ;:desc "evil-window-delete"
+       "w c" #'evil-window-delete
+       ))
+#+end_src
 ** Doom modeline
-- Set the color of the filename when modified to catppuccin macchiato's "peach."
+- Set the color of the filename when modified to catppuccin latte's maroon.
 - Change the height of doom's modeline.
 #+begin_src elisp
 (custom-set-faces!
-  '(doom-modeline-buffer-modified :foreground "#f5a97f"))
+  '(doom-modeline-buffer-modified :foreground "#e64553"))
 (setq doom-modeline-height 28)
 #+end_src
 
@@ -207,6 +229,9 @@ It also implements some apprearance effects as suggested by minad/org-mode.
   :config
   (setq org-modern-star '("◉" "●" "○" "⁖" "◿" "◌"))
   )
+#+end_src
+
+#+begin_src elisp :tangle no
 ;; (add-hook! org-mode
 ;;            #'org-modern-mode)
 ;; (add-hook! 'org-agenda-finalize-hook #'org-modern-agenda)
@@ -395,9 +420,13 @@ Doom emacs's ~custom-set-faces!~ macro makes this trivial.
 It can be difficult to see source code blocks in dark themes, especially in catppuccin.
 So I adjust the background manually.
 
+While using Catppuccin flavors, I use the "mantle" color code.
+
 #+begin_src elisp
-(custom-set-faces!
-  '(org-block :background "#1e2030"))
+(after! org
+  (custom-set-faces!
+  ; Macchiatto --> '(org-block :background "#1e2030")) ; for Macchiato
+    '(org-block :background "#e6e9ef"))) ; for Latte
 #+end_src
 
 *** reveal emphasis markers when editing
