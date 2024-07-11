@@ -3,6 +3,15 @@
 #+startup: content
 
 * General Configuration
+#+begin_src emacs-lisp :tangle no
+(setq debug-on-error t)
+#+end_src
+** Add nix-installed packages to path
+For whatever reason, doom does not pick up on my PATH has having nix.
+So I add it here manually:
+#+begin_src elisp
+(add-to-list 'exec-path "~/.nix-profile/bin")
+#+end_src
 ** User Info
 #+begin_src elisp
 (setq user-full-name "David Rambo"

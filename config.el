@@ -1,3 +1,5 @@
+(add-to-list 'exec-path "~/.nix-profile/bin")
+
 (setq user-full-name "David Rambo"
       user-mail-address "davidrambo@mailfence.com")
 
