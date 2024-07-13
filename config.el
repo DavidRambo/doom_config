@@ -464,16 +464,5 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
 (map! :after evil-org :map evil-org-mode-map
       :nv "z o" #'evil-open-fold)
 
-(defun efs/org-babel-tangle-config ()
-  (when (string-equal (buffer-file-name)
-                      (expand-file-name "~/.config/emacs-from-scratch/config.org"))
-    ;; Dynamic scoping to the rescue
-    (let ((org-confirm-babel-evaluate nil))
-      (org-babel-tangle))))
-
-(add-hook! org-mode (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
-
-(setq geiser-guile-binary "/usr/bin/guile3.0")
-
 (use-package! powerthesaurus
   :defer t)
