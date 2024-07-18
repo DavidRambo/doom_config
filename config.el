@@ -46,7 +46,7 @@
             doom-big-font (font-spec :size 28.0))
        )
       ((eq system-type 'darwin)
-        (setq doom-font (font-spec :family "Iosevka Nerd Font" :size 14.0 :weight 'regular)
+        (setq doom-font (font-spec :family "Iosevka Nerd Font" :size 16.0 :weight 'regular)
             doom-variable-pitch-font (font-spec :family "Iosevka Aile" :size 16.0 :weight 'regular)
             doom-serif-font (font-spec :family "PT Serif" :size 16.0)
             doom-big-font (font-spec :size 28.0))
