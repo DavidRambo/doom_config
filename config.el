@@ -375,11 +375,9 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
      :target (file+head "%<%Y-%m-%d>.org"
                         "#+title: %<%B %d, %Y (%A)>\n")
      :if-new (file+head "%<%Y-%m-%d>.org"
-                        "#+title: %<%B %d, %Y (%A)>\n* Sleep Diary - %<%I:%M %p>\n1. ")
+                        "#+title: %<%B %d, %Y (%A)>\n")
      ;; :unnarrowed t
      )
-    ;; ("s" "sleep diary" entry "* Sleep Diary - %<%I:%M %p>\n1. %?"
-    ;;  :target (file+head "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n"))
     )
    )
 
