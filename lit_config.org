@@ -529,11 +529,8 @@ This used to use ~all-the-icons-~ functions.
 
 #+begin_src elisp
 (setq org-agenda-category-icon-alist
-      `(("Postdoc" ,(nerd-icons-octicon "nf-oct-pencil") nil nil :ascent center)
-        ("Coding" ,(nerd-icons-faicon "nf-fa-code") nil nil :ascent center)
-        ("Home" ,(nerd-icons-octicon "nf-oct-home") nil nil :ascent center)
-        ("Habits" ,(nerd-icons-faicon "nf-fa-calendar_check_o") nil nil :ascent center)
-        ))
+      `(("Coding" ,(nerd-icons-faicon "nf-fa-code") nil nil :ascent center)
+        ("Home" ,(nerd-icons-octicon "nf-oct-home") nil nil :ascent center)))
 #+end_src
 
 *** Set custom commands that show up with "SPC o A":
@@ -562,7 +559,7 @@ This used to use ~all-the-icons-~ functions.
      )
 
     ("o" "OSU"
-     ((tags-todo "+OSU"
+     ((tags-todo "+osu"
                 ((org-agenda-overriding-header "OSU")
                  (org-agenda-remove-tags nil)))))
 

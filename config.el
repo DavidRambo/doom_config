@@ -301,11 +301,8 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
  ;;      ("WAITING" . (:foreground "black" :weight light))))
 
 (setq org-agenda-category-icon-alist
-      `(("Postdoc" ,(nerd-icons-octicon "nf-oct-pencil") nil nil :ascent center)
-        ("Coding" ,(nerd-icons-faicon "nf-fa-code") nil nil :ascent center)
-        ("Home" ,(nerd-icons-octicon "nf-oct-home") nil nil :ascent center)
-        ("Habits" ,(nerd-icons-faicon "nf-fa-calendar_check_o") nil nil :ascent center)
-        ))
+      `(("Coding" ,(nerd-icons-faicon "nf-fa-code") nil nil :ascent center)
+        ("Home" ,(nerd-icons-octicon "nf-oct-home") nil nil :ascent center)))
 
 (setq org-agenda-custom-commands
   '(("n" "Active and Next Tasks"
@@ -331,7 +328,7 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
      )
 
     ("o" "OSU"
-     ((tags-todo "+OSU"
+     ((tags-todo "+osu"
                 ((org-agenda-overriding-header "OSU")
                  (org-agenda-remove-tags nil)))))
 
