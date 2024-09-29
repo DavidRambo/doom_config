@@ -99,8 +99,12 @@ I tend to use either "SauceCodePro NF" or "JetBrainsMono Nerd Font"
 ** Theme
 #+begin_src elisp
 (setq doom-theme 'catppuccin
-      catppuccin-flavor 'macchiato
       catppuccin-enlarge-headings 'nil)
+
+(cond ((eq system-type 'gnu/linux)
+             (setq catppuccin-flavor 'macchiato))
+            ((eq system-type 'darwin)
+             (setq catppuccin-flavor 'latte)))
 #+end_src
 
 ** Line spacing
@@ -566,8 +570,8 @@ This used to use ~all-the-icons-~ functions.
      (
       (tags-todo "jobs"
         ((org-agenda-overriding-header "\nJob Application Tasks")))
-      (tags-todo "+coding"
-        ((org-agenda-overriding-header "\nProgramming Tasks")))
+      (tags-todo "+osu"
+        ((org-agenda-overriding-header "\nOSU Tasks")))
      ))
 
     ;; ("r" "Reading Tasks"

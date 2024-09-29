@@ -55,8 +55,12 @@
                     :underline nil)
 
 (setq doom-theme 'catppuccin
-      catppuccin-flavor 'macchiato
       catppuccin-enlarge-headings 'nil)
+
+(cond ((eq system-type 'gnu/linux)
+             (setq catppuccin-flavor 'macchiato))
+            ((eq system-type 'darwin)
+             (setq catppuccin-flavor 'latte)))
 
 (define-key evil-normal-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
 (define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
@@ -335,8 +339,8 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
      (
       (tags-todo "jobs"
         ((org-agenda-overriding-header "\nJob Application Tasks")))
-      (tags-todo "+coding"
-        ((org-agenda-overriding-header "\nProgramming Tasks")))
+      (tags-todo "+osu"
+        ((org-agenda-overriding-header "\nOSU Tasks")))
      ))
 
     ;; ("r" "Reading Tasks"
