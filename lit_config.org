@@ -389,9 +389,12 @@ It can be difficult to see source code blocks in dark themes, especially in catp
 So I adjust the background manually.
 
 #+begin_src elisp
-(custom-set-faces!
-  '(org-block :background "#1e2030"))
+(cond ((eq system-type 'gnu/linux)
+       (custom-set-faces! '(org-block :background "#1e2030")))
+      ((eq system-type 'darwin)
+       (custom-set-faces! '(org-block :background "#dce0e8"))))
 #+end_src
+
 
 *** reveal emphasis markers when editing
 #+begin_src elisp
