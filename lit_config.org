@@ -537,7 +537,8 @@ This used to use ~all-the-icons-~ functions.
 #+begin_src elisp
 (setq org-agenda-custom-commands
   '(("n" "Active and Next Tasks"
-     ((todo "ACTIVE"
+     (
+      (todo "ACTIVE"
             ((org-agenda-overriding-header "\nActive Tasks\n-----------------")
              (org-agenda-prefix-format "   %i %?-2 t%s")
              (org-agenda-remove-tags nil)))
@@ -559,9 +560,18 @@ This used to use ~all-the-icons-~ functions.
      )
 
     ("o" "OSU"
-     ((tags-todo "+osu"
-                ((org-agenda-overriding-header "OSU")
-                 (org-agenda-remove-tags nil)))))
+      ((tags-todo "325"
+                 ((org-agenda-overriding-header "Analysis of Algorithms\n-----------------------")
+                  (org-agenda-prefix-format "  %i %?-2 t%s")
+                  (org-agenda-remove-tags t)))
+      (tags-todo "361"
+                 ((org-agenda-overriding-header "Software Engineering I\n-----------------------")
+                  (org-agenda-prefix-format "  %i %?-2 t%s")
+                  (org-agenda-remove-tags t)))
+      (tags-todo "381"
+                 ((org-agenda-overriding-header "Programming Languages\n-----------------------")
+                  (org-agenda-prefix-format "  %i %?-2 t%s")
+                  (org-agenda-remove-tags t)))))
 
     ("w" "Work-related tasks"
      (
@@ -684,6 +694,11 @@ I don't know how to integrate descriptions in this way.
 )
 #+end_src
 
+#+begin_src emacs-lisp :tangle no
+(let ((org-super-agenda-groups
+       '((:auto-category t))))
+  (org-agenda-list))
+#+end_src
 ** Turn off git-gutter
 Git-gutter-mode messes with the visual line traversal, so I turn it off in org-mode.
 #+begin_src elisp

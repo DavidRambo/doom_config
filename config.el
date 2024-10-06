@@ -328,9 +328,18 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
      )
 
     ("o" "OSU"
-     ((tags-todo "+osu"
-                ((org-agenda-overriding-header "OSU")
-                 (org-agenda-remove-tags nil)))))
+      ((tags-todo "325"
+                 ((org-agenda-overriding-header "Analysis of Algorithms\n-----------------------")
+                  (org-agenda-prefix-format "  %i %?-2 t%s")
+                  (org-agenda-remove-tags t)))
+      (tags-todo "361"
+                 ((org-agenda-overriding-header "Software Engineering I\n-----------------------")
+                  (org-agenda-prefix-format "  %i %?-2 t%s")
+                  (org-agenda-remove-tags t)))
+      (tags-todo "381"
+                 ((org-agenda-overriding-header "Programming Languages\n-----------------------")
+                  (org-agenda-prefix-format "  %i %?-2 t%s")
+                  (org-agenda-remove-tags t)))))
 
     ("w" "Work-related tasks"
      (
