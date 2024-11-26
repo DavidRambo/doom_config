@@ -44,8 +44,8 @@
             doom-big-font (font-spec :size 28.0))
        )
       ((eq system-type 'darwin)
-        (setq doom-font (font-spec :family "Iosevka Nerd Font" :size 14.0 :weight 'light)
-            doom-variable-pitch-font (font-spec :family "Iosevka Aile" :size 16.0 :weight 'light)
+        (setq doom-font (font-spec :family "Iosevka Nerd Font" :size 14.0 :weight 'regular)
+            doom-variable-pitch-font (font-spec :family "Iosevka Aile" :size 16.0 :weight 'regular)
             doom-serif-font (font-spec :family "PT Serif" :size 16.0)
             doom-big-font (font-spec :size 28.0))
        ))
@@ -218,7 +218,7 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
               (org-level-6 . 1.0)
               (org-level-7 . 1.0)
               (org-level-8 . 1.0)))
-   (set-face-attribute (car face) nil :weight 'light :height (cdr face)))
+   (set-face-attribute (car face) nil :weight 'regular :height (cdr face)))
 )
 
 (custom-set-faces!
