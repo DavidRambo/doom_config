@@ -389,14 +389,12 @@ Doom emacs's ~custom-set-faces!~ macro makes this trivial.
 It can be difficult to see source code blocks in dark themes, especially in catppuccin.
 So I adjust the background manually.
 
-#+begin_src elisp
+#+begin_src elisp :tangle no
 (cond ((eq system-type 'gnu/linux)
        (custom-set-faces! '(org-block :background "#1e2030")))
       ((eq system-type 'darwin)
        (custom-set-faces! '(org-block :background "#dce0e8"))))
 #+end_src
-
-
 *** reveal emphasis markers when editing
 #+begin_src elisp
 (add-hook! 'org-mode #'org-appear-mode)

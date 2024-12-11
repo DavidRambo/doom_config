@@ -220,17 +220,13 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
               (org-level-6 . 1.0)
               (org-level-7 . 1.0)
               (org-level-8 . 1.0)))
-   (set-face-attribute (car face) nil :weight 'regular :height (cdr face)))
+   ;; (set-face-attribute (car face) nil :weight 'regular :height (cdr face))
+   )
 )
 
 (custom-set-faces!
   '(org-quote :inherit doom-variable-pitch-font :slant normal))
 (setq org-fontify-whole-block-delimiter-line nil)
-
-(cond ((eq system-type 'gnu/linux)
-       (custom-set-faces! '(org-block :background "#1e2030")))
-      ((eq system-type 'darwin)
-       (custom-set-faces! '(org-block :background "#dce0e8"))))
 
 (add-hook! 'org-mode #'org-appear-mode)
 
@@ -310,7 +306,8 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
 
 (setq org-agenda-custom-commands
   '(("n" "Active and Next Tasks"
-     ((todo "ACTIVE"
+     (
+      (todo "ACTIVE"
             ((org-agenda-overriding-header "\nActive Tasks\n-----------------")
              (org-agenda-prefix-format "   %i %?-2 t%s")
              (org-agenda-remove-tags nil)))
