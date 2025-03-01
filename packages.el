@@ -61,3 +61,5 @@
   :recipe (:host gitlab :repo "Titan-C/org-cv" :files ("*.el")))
 (package! catppuccin-theme)
 (package! transient)
+(package! ultra-scroll
+  :recipe (:host github :repo "jdtsmith/ultra-scroll" :files ("ultra-scroll.el")))

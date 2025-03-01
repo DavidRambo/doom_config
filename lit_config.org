@@ -187,6 +187,10 @@ For now I am using doom's builtin approach: snipe to the first character and the
 (define-key evil-normal-state-map (kbd "s") 'avy-goto-char-2-below)
 (define-key evil-normal-state-map (kbd "S") 'avy-goto-char-2-above)
 #+end_src
+** Ultra Scroll
+#+begin_src emacs-lisp
+(ultra-scroll-mode t)
+#+end_src
 * Org Mode
 ** Default org file directory
 #+begin_src elisp
