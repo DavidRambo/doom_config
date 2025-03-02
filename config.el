@@ -371,6 +371,10 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
    '(("d" "default" plain
       "#+filetags: %?"
       :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+      :unnarrowed t)
+   ("e" "ephemeral" entry
+      "* ${title}\n:PROPERTIES:\n:ID: %(org-id-new)\n:END:\n%?"
+      :target (node "Capture")
       :unnarrowed t)))
 
   ;; directory is relative to org-roam-directory

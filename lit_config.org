@@ -623,6 +623,10 @@ Alternative custom agenda views:
    '(("d" "default" plain
       "#+filetags: %?"
       :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+      :unnarrowed t)
+   ("e" "ephemeral" entry
+      "* ${title}\n:PROPERTIES:\n:ID: %(org-id-new)\n:END:\n%?"
+      :target (node "Capture")
       :unnarrowed t)))
 
   ;; directory is relative to org-roam-directory
