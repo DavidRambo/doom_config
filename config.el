@@ -401,18 +401,29 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
       (:prefix-map ("r" . "Org-Roam commands")
        :desc "Toggle org-roam buffer"
        "t" #'org-roam-buffer-toggle
+
        :desc "Find or Create Node"
        "f" #'org-roam-node-find
+
        :desc "Insert Node"
        "i" #'org-roam-node-insert
+
+       :desc "Capture to node"
+       "c" #'org-roam-capture
+
        :desc "Create id for heading node"
-       "c" #'org-id-get-create
+       "h" #'org-id-get-create
+
        :desc "Add alias for node"
        "a" #'org-roam-alias-add
-       :desc "Dailies capture map"
-       "d" #'org-roam-dailies-map
-       :desc "Capture daily journal"
-       "j" #'org-roam-dailies-capture-today
+
+       :desc "Extract to new file"
+       "e" #'org-roam-extract-subtree
+
+       ;; :desc "Dailies capture map"
+       ;; "d" #'org-roam-dailies-map
+       ;; :desc "Capture daily journal"
+       ;; "j" #'org-roam-dailies-capture-today
        )
       )
 
