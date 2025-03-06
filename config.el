@@ -369,9 +369,10 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
   (org-roam-directory "~/notes")
   (org-roam-capture-templates
    '(("d" "default" plain
-      "#+filetags: "
+      "%?"
       :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n\n%?")
-      :unnarrowed t)
+      :unnarrowed t
+      :jump-to-captured t)
    ("e" "ephemeral" entry
       "* ${title}\n:PROPERTIES:\n:ID: %(org-id-new)\n:END:\n%?"
       :target (node "Capture")
