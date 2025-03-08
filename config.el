@@ -384,7 +384,7 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
 
   (org-roam-node-display-template
           (concat "${title:*} "
-                  (propertize "${tags:10}" 'face 'org-tag)))
+                  (propertize "${tags:24}" 'face 'org-tag)))
   :config
   (org-roam-setup))
 

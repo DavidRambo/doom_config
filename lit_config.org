@@ -636,7 +636,7 @@ Alternative custom agenda views:
 
   (org-roam-node-display-template
           (concat "${title:*} "
-                  (propertize "${tags:10}" 'face 'org-tag)))
+                  (propertize "${tags:24}" 'face 'org-tag)))
   :config
   (org-roam-setup))
 #+end_src
