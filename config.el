@@ -370,7 +370,8 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
   (org-roam-capture-templates
    '(("d" "default" plain
       "%?"
-      :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n\n%?")
+      :if-new (file+head "${slug}.org"
+                         "#+title: ${title}\n\n")
       :unnarrowed t
       :jump-to-captured t)
    ("e" "ephemeral" entry
@@ -379,6 +380,7 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
       :unnarrowed t
       :empty-lines 1)))
 
+  (org-roam-extract-new-file-path "${slug}.org")
 
   (org-roam-node-display-template
           (concat "${title:*} "

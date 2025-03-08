@@ -622,7 +622,8 @@ Alternative custom agenda views:
   (org-roam-capture-templates
    '(("d" "default" plain
       "%?"
-      :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n\n%?")
+      :if-new (file+head "${slug}.org"
+                         "#+title: ${title}\n\n")
       :unnarrowed t
       :jump-to-captured t)
    ("e" "ephemeral" entry
@@ -635,7 +636,7 @@ Alternative custom agenda views:
 
   (org-roam-node-display-template
           (concat "${title:*} "
-                  (propertize "${tags:24}" 'face 'org-tag)))
+                  (propertize "${tags:10}" 'face 'org-tag)))
   :config
   (org-roam-setup))
 #+end_src
