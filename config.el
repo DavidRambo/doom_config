@@ -379,19 +379,6 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
       :unnarrowed t
       :empty-lines 1)))
 
-  ;; directory is relative to org-roam-directory
-  (org-roam-dailies-directory "../journal/")
-
-  (org-roam-dailies-capture-templates
-   '(("d" "default" entry "* %<%I:%M %p>\n%?"
-     :target (file+head "%<%Y-%m-%d>.org"
-                        "#+title: %<%B %d, %Y (%A)>\n")
-     :if-new (file+head "%<%Y-%m-%d>.org"
-                        "#+title: %<%B %d, %Y (%A)>\n")
-     ;; :unnarrowed t
-     )
-    )
-   )
 
   (org-roam-node-display-template
           (concat "${title:*} "
