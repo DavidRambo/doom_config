@@ -377,8 +377,7 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
    ("e" "ephemeral" entry
       "* ${title}\n:PROPERTIES:\n:ID: %(org-id-new)\n:END:\n%?"
       :target (node "Capture")
-      :unnarrowed t
-      :empty-lines 1)))
+      :unnarrowed t)))
 
   (org-roam-extract-new-file-path "${slug}.org")
 
