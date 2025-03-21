@@ -102,6 +102,8 @@
 
 (setq org-directory "~/notes/")
 
+(setq org-cite-global-bibliography '("~/notes/biblio.bib"))
+
 (use-package! org-modern
   :hook (org-mode . org-modern-mode)
   :config

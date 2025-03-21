@@ -196,7 +196,10 @@ For now I am using doom's builtin approach: snipe to the first character and the
 #+begin_src elisp
 (setq org-directory "~/notes/")
 #+end_src
-
+** Org Cite
+#+begin_src emacs-lisp
+(setq org-cite-global-bibliography '("~/notes/biblio.bib"))
+#+end_src
 ** Org Modern
 This block adds org-mode hooks to enable org-modern.
 It also implements some apprearance effects as suggested by minad/org-mode.
