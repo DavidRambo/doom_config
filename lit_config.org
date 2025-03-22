@@ -164,11 +164,10 @@ Split horizontally by default.
 ** Window focusing
 #+begin_src emacs-lisp
 (map! :leader :n
-      :prefix "w"
-      "n" #'evil-window-left
-      "i" #'evil-window-right
-      "e" #'evil-window-down
-      "u" #'evil-window-up)
+      "w n" #'evil-window-left
+      "w i" #'evil-window-right
+      "w e" #'evil-window-down
+      "w u" #'evil-window-up)
 #+end_src
 ** Evil search in folds
 https://github.com/doomemacs/doomemacs/issues/6478#issuecomment-1219582005
