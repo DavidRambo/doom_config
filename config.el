@@ -339,12 +339,12 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
      )
 
     ("o" "OSU"
-      ((tags-todo "340"
-                 ((org-agenda-overriding-header "Introduction to Databases\n-----------------------")
+      ((tags-todo "475"
+                 ((org-agenda-overriding-header "Parallel Programming\n-----------------------")
                   (org-agenda-prefix-format "  %i %?-2 t%s")
                   (org-agenda-remove-tags t)))
-      (tags-todo "374"
-                 ((org-agenda-overriding-header "Operating Systems I\n-----------------------")
+      (tags-todo "474"
+                 ((org-agenda-overriding-header "Operating Systems II\n-----------------------")
                   (org-agenda-prefix-format "  %i %?-2 t%s")
                   (org-agenda-remove-tags t)))
       ))
