@@ -378,8 +378,8 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
   (org-roam-capture-templates
    '(("d" "default" plain
       "%?"
-      :if-new (file+head "${slug}.org"
-                         "#+title: ${title}\n\n")
+      :target (file+head "${slug}.org"
+                         "#+title: ${title}\n")
       :unnarrowed t
       :jump-to-captured t)
    ("e" "ephemeral" entry
