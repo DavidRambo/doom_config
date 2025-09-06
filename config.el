@@ -425,6 +425,42 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
        )
       )
 
+(defun bk-get-all-org-ids ()
+  "Hole alle IDs aus der 'nodes' Tabelle der Org-roam Datenbank."
+  (let ((results (org-roam-db-query
+                  [:select [id] :from nodes])))
+    (mapcar (lambda (row) (car row)) results)))
+
+(defun bk-get-all-ids-with-links ()
+  "Retrieve all IDs of notes containing links from the Org-roam database."
+  (let ((results (org-roam-db-query
+                  [:select [source] :from links :where (= type "id")])))
+    (mapcar (lambda (row) (car row)) results)))
+
+(defun bk-get-linked-ids ()
+  "Hole alle Ziel-IDs aus der Org-roam Datenbank, bei denen der Typ 'id' ist."
+  (let ((results (org-roam-db-query
+                  [:select [dest] :from links :where (= type "id")])))
+    (mapcar (lambda (row) (car row)) results)))
+
+(defun bk-find-unlinked-org-roam-nodes ()
+  "Find Org-Roam nodes that are not linked to any other nodes and insert links at point."
+  (interactive)
+  (let ((all-ids (bk-get-all-org-ids))
+        (linked-ids (bk-get-all-ids-with-links))
+        (ids-with-links (bk-get-linked-ids)))
+    (delete-dups all-ids)
+    (delete-dups linked-ids)
+    (delete-dups ids-with-links)
+
+    (setq red-1 (cl-set-difference all-ids linked-ids :test 'equal))
+    (setq red-2 (cl-set-difference red-1 ids-with-links :test 'equal))
+
+     (dolist (id red-2)
+      (let* ((node (org-roam-node-from-id id))
+             (title (org-roam-node-title node)))
+        (insert (format "[[id:%s][%s]]\n" id title))))))
+
 (use-package! org-super-agenda
   :after org-agenda
   :config
