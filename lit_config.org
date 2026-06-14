@@ -106,7 +106,7 @@ I tend to use either "SauceCodePro NF" or "JetBrainsMono Nerd Font"
       catppuccin-enlarge-headings 'nil)
 
 (cond ((eq system-type 'gnu/linux)
-             (setq catppuccin-flavor 'macchiato))
+             (setq catppuccin-flavor 'mocha))
             ((eq system-type 'darwin)
              (setq catppuccin-flavor 'latte)))
 #+end_src
