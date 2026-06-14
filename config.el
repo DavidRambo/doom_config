@@ -92,10 +92,10 @@
 (setq doom-modeline-height 28)
 
 (map! :leader :n
-      "w n" #'evil-window-left
-      "w i" #'evil-window-right
-      "w e" #'evil-window-down
-      "w u" #'evil-window-up)
+      "w h" #'evil-window-left
+      "w e" #'evil-window-right
+      "w a" #'evil-window-down
+      "w o" #'evil-window-up)
 
 (after! evil
   (evil-select-search-module 'evil-search-module 'isearch))
