@@ -186,11 +186,11 @@ https://github.com/doomemacs/doomemacs/issues/6478#issuecomment-1219582005
 #+end_src
 
 ** Avy
-Per tecosaur's configuration, this sets Avy's character prompts to letters in Colemak's homerow:
+Per tecosaur's configuration (which targets Colemak), this sets Avy's character prompts to letters in the Gallium/Graphite layouts' homerow:
 #+begin_src elisp
 (after! avy
   ;; home row priorities: 8 6 4 5 - - 1 2 3 7
-  (setq avy-keys '(?t ?e ?i ?s ?r ?o ?a ?n)))
+  (setq avy-keys '(?h ?a ?e ?t ?s ?r ?i ?n)))
 #+end_src
 
 In neovim I use ~leap.nvim~ mapped to "s" and "S".
