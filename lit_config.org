@@ -72,6 +72,10 @@ Turn off global line highlight.
 #+begin_src elisp
 (remove-hook 'doom-first-buffer-hook #'global-hl-line-mode)
 #+end_src
+This stopped working, so I'll set it to nil.
+#+begin_src elisp
+(setq global-hl-line-modes nil)
+#+end_src
 ** Fonts
 Set font face and size depending upon the system: ~gnu/linux~ for Linux, ~darwin~ for MacOS.
 Be sure to include the decimal when declaring ~:size~.
