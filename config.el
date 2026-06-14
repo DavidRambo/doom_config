@@ -1,7 +1,7 @@
 (setq user-full-name "David Rambo"
       user-mail-address "davidrambo@mailfence.com")
 
-(setq initial-frame-alist '((top . 60) (left . 1262) (width . 92) (height . 50)))
+(setq initial-frame-alist '((top . 60) (left . 1262) (width . 94) (height . 50)))
 
 (defun frame-center ()
   "Center the current frame."
@@ -36,10 +36,12 @@
 
 (remove-hook 'doom-first-buffer-hook #'global-hl-line-mode)
 
+(setq global-hl-line-modes nil)
+
 (cond ((eq system-type 'gnu/linux)
         ;; (setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 13.0)
         (setq doom-font (font-spec :family "IosevkaTerm Nerd Font" :size 14.0)
-            doom-variable-pitch-font (font-spec :family "Iosevka Aile" :size 14.0 :weight 'regular)
+            doom-variable-pitch-font (font-spec :family "Iosevka Aile" :size 16.0 :weight 'regular)
             doom-serif-font (font-spec :family "Palatino Linotype" :size 16.0)
             doom-big-font (font-spec :size 28.0))
        )
@@ -58,7 +60,7 @@
       catppuccin-enlarge-headings 'nil)
 
 (cond ((eq system-type 'gnu/linux)
-             (setq catppuccin-flavor 'macchiato))
+             (setq catppuccin-flavor 'mocha))
             ((eq system-type 'darwin)
              (setq catppuccin-flavor 'latte)))
 
@@ -102,7 +104,12 @@
 
 (after! avy
   ;; home row priorities: 8 6 4 5 - - 1 2 3 7
-  (setq avy-keys '(?t ?e ?i ?s ?r ?o ?a ?n)))
+  (setq avy-keys '(?h ?a ?e ?t ?s ?r ?i ?n)))
+
+(map! :after evil-org :map evil-org-mode-map
+      ;; :leader
+      :nv "s" #'avy-goto-char-2-below
+      :nv "S" #'avy-goto-char-2-above)
 
 (ultra-scroll-mode t)
 
@@ -210,6 +217,7 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
    org-hide-emphasis-markers t
    org-pretty-entities t
    org-ellipsis " ▾ "
+   org-list-indent-offset 1
    ;; From minad/org-modern: Edit settings
    org-auto-align-tags nil
    org-tags-column 0
@@ -515,7 +523,7 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
       "t n" #'org-toggle-narrow-to-subtree)
 
 (map! :after evil-org :map evil-org-mode-map
-      :nv "z o" #'evil-open-fold)
+      :nv "zo" #'evil-open-fold)
 
 (defun efs/org-babel-tangle-config ()
   (when (string-equal (buffer-file-name)
