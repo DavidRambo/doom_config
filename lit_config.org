@@ -363,6 +363,7 @@ Unnecessary alternative approach:
    org-hide-emphasis-markers t
    org-pretty-entities t
    org-ellipsis " ▾ "
+   org-list-indent-offset 1
    ;; From minad/org-modern: Edit settings
    org-auto-align-tags nil
    org-tags-column 0
